@@ -2,6 +2,8 @@ import Image from "next/image";
 import { Toprow } from "./_components/toprow";
 import { Rowbox } from "../components/rowbox";
 import { InGameStats } from "./_components/inGameStats";
+import { AccuStats } from "./_components/accuStat";
+import { MissSafety } from "./_components/missSafety";
 
 export default function Home() {
   return (
@@ -30,6 +32,22 @@ export default function Home() {
           boxTitle="Longest Game Winning Streak"
         />
         <InGameStats leftNumber={1} rightNumber={1} inGameStats={20} />
+        <Rowbox leftNumber={1} rightNumber={2} boxTitle="Balls Pocketed" />
+        <Rowbox leftNumber={1} rightNumber={2} boxTitle="Balls Missed" />
+        <Rowbox
+          leftNumber={1}
+          rightNumber={2}
+          boxTitle="Unforced
+Errors"
+        />
+        <Rowbox leftNumber={1} rightNumber={2} boxTitle="Safety Errors" />
+        <Rowbox leftNumber={1} rightNumber={2} boxTitle="Kicking Errors" />
+        <AccuStats leftNumber={0} rightNumber={0} boxTitle="ACCU-STAT" />
+        <MissSafety
+          leftNumber={0}
+          rightNumber={0}
+          boxTitle="ACCU-STAT with Miss Safety"
+        />
       </div>
     </div>
   );

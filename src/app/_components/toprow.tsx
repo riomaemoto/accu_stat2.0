@@ -3,8 +3,8 @@ export const Toprow = () => {
     <div className="w-full">
       <div className="w-full max-w-[1400px] flex flex-row  items-center justify-center">
         <input
-          className="w-[170px] md:w-[150px] h-[70px] border-[1px] border-solid text-center md:text-[14px]"
-          placeholder="Enter your name here"
+          className="w-[140px] md:w-[150px] h-[70px] border-[1px] border-solid text-center text-[14px] md:text-[16px]"
+          placeholder="Enter Name here"
           type="text"
         />
 
@@ -13,8 +13,8 @@ export const Toprow = () => {
         </div>
 
         <input
-          className="w-[170px] md:w-[150px] h-[70px] border-[1px] border-solid text-center md:text-[14px]"
-          placeholder="Enter your name here"
+          className="w-[140px] md:w-[150px] h-[70px] border-[1px] border-solid text-center text-[14px] md:text-[16px]"
+          placeholder="Enter Name here"
           type="text"
         />
       </div>
