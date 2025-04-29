@@ -9,7 +9,7 @@ export const InGameStats = ({
     <div className="w-full">
       <div className="w-full max-w-[1400px] flex flex-row  items-center justify-center">
         <div className="w-full max-w-[1400px] flex justify-center items-center">
-          <div className="w-full max-w-[550px] h-[70px] border-[1px] border-solid flex justify-center items-center">
+          <div className="w-full max-w-[550px] h-[70px] border-[1px] border-solid flex justify-center items-center bg-sky-200">
             In Game Stats
           </div>
         </div>

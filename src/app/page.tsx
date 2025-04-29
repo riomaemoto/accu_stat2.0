@@ -8,7 +8,7 @@ import { MissSafety } from "./_components/missSafety";
 export default function Home() {
   return (
     <div className="w-full flex flex-col items-center justify-center bg-gray-100">
-      <div className="w-full max-w-[1400px] flex flex-col items-center justify-center p-5 bg-green-200">
+      <div className="w-full max-w-[1400px] flex flex-col items-center justify-center p-5">
         <Toprow />
         <Rowbox leftNumber={1} rightNumber={2} boxTitle="Game Score" />
         <Rowbox leftNumber={1} rightNumber={2} boxTitle="Total Break" />

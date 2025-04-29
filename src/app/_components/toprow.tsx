@@ -8,7 +8,7 @@ export const Toprow = () => {
           type="text"
         />
 
-        <div className="border border-solid w-[260px] md:w-[250px] h-[70px] flex items-center justify-center">
+        <div className="border border-solid w-[260px] md:w-[250px] h-[70px] flex items-center justify-center bg-sky-200">
           Breaks
         </div>
 
