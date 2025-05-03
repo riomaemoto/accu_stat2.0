@@ -1,3 +1,5 @@
+import { RecoilState } from "recoil";
+
 export type RowboxProps = {
   leftNumber: number;
   leftPercentage?: number;
