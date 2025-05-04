@@ -1,4 +1,4 @@
-import { RecoilState } from "recoil";
+import { SetStateAction } from "jotai";
 
 export type RowboxProps = {
   leftNumber: number;
@@ -7,4 +7,6 @@ export type RowboxProps = {
   rightPercentage?: number;
   boxTitle?: string;
   inGameStats?: number;
+  setLeftNumber?: (value: SetStateAction<number>) => void;
+  setRightNumber?: (value: SetStateAction<number>) => void;
 };

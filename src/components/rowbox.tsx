@@ -1,26 +1,34 @@
 "use client";
 import { RowboxProps } from "@/types";
 import { useState } from "react";
-export const Rowbox = ({ boxTitle }: RowboxProps) => {
-  const [leftNumber, setLeftNumber] = useState(0);
-  const [rightNumber, setRightNumber] = useState(0);
+export const Rowbox = ({
+  boxTitle,
+  leftNumber,
+  setLeftNumber,
+  setRightNumber,
+  rightNumber,
+}: RowboxProps) => {
   const incrementLeft = () => {
+    if (setLeftNumber === undefined) return;
     setLeftNumber(leftNumber + 1);
   };
-  const incrementRight = () => {
-    setRightNumber(rightNumber + 1);
-  };
+
   const decreaseLeft = () => {
-    if (leftNumber > 0) {
+    if (leftNumber > 0 && setLeftNumber !== undefined) {
       setLeftNumber(leftNumber - 1);
     }
   };
 
+  const incrementRight = () => {
+    if (!setRightNumber) return;
+    setRightNumber(rightNumber + 1);
+  };
   const decreaseRight = () => {
-    if (rightNumber > 0) {
+    if (rightNumber > 0 && setRightNumber) {
       setRightNumber(rightNumber - 1);
     }
   };
+
   return (
     <div className="w-full flex">
       <div className="w-full max-w-[1400px] flex flex-row items-center justify-center">

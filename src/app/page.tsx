@@ -5,19 +5,44 @@ import {} from "@/lib/recoil/atom/atom";
 import { InGameStats } from "./_components/inGameStats";
 import { AccuStats } from "./_components/accuStat";
 import { MissSafety } from "./_components/missSafety";
-import { PercentageRowbox } from "@/components/percentageRowbox";
+import { atom, useAtom, SetStateAction } from "jotai";
+// import { PercentageRowbox } from "@/components/percentageRowbox";
+
+const gameScoreLeftAtom = atom(0);
+const gameScoreRightAtom = atom(0);
+const totalBreakLeftAtom = atom(0);
+const totalBreakRightAtom = atom(0);
 
 export default function Home() {
+  const [gameScoreLeft, setGameScoreLeft] = useAtom(gameScoreLeftAtom);
+  const [gameScoreRight, setGameScoreRight] = useAtom(gameScoreRightAtom);
+  const [totalBreakLeft, setTotalBreakLeft] = useAtom(totalBreakLeftAtom);
+  const [totalBreakRight, setTotalBreakRight] = useAtom(totalBreakRightAtom);
+
   return (
     <div className="w-full flex flex-col items-center justify-center bg-gray-100">
       <div className="w-full max-w-[1400px] flex flex-col items-center justify-center p-5">
         <Toprow />
-        <Rowbox leftNumber={0} rightNumber={0} boxTitle="Game Score" />
-        <Rowbox leftNumber={0} rightNumber={0} boxTitle="Total Break" />
-        <PercentageRowbox
-          leftNumber={0}
-          rightNumber={0}
+        <Rowbox
+          leftNumber={gameScoreLeft}
+          rightNumber={gameScoreRight}
+          setLeftNumber={setGameScoreLeft}
+          setRightNumber={setGameScoreRight}
+          boxTitle="Game Score"
+        />
+        <Rowbox
+          leftNumber={totalBreakLeft}
+          rightNumber={totalBreakRight}
+          setLeftNumber={setTotalBreakLeft}
+          setRightNumber={setTotalBreakRight}
+          boxTitle="Total Break"
+        />
+        {/* <PercentageRowbox
+          leftNumber={drLeftNumber}
+          rightNumber={drRightNumber}
           boxTitle="Dry Breaks"
+          setLeftNumber={setDrLeftNumber}
+          setRightNumber={setDrRightNumber}
         />
         <PercentageRowbox
           leftNumber={0}
@@ -39,7 +64,7 @@ export default function Home() {
           leftNumber={0}
           rightNumber={0}
           boxTitle="Consecutive Break and Runs"
-        />
+        /> */}
         <Rowbox
           leftNumber={0}
           rightNumber={0}
