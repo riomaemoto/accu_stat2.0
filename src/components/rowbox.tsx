@@ -1,6 +1,5 @@
 "use client";
 import { RowboxProps } from "@/types";
-import { useState } from "react";
 export const Rowbox = ({
   boxTitle,
   leftNumber,
