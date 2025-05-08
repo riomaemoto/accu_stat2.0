@@ -5,7 +5,8 @@ import { InGameStats } from "./_components/inGameStats";
 import { AccuStats } from "./_components/accuStat";
 import { MissSafety } from "./_components/missSafety";
 import { atom, useAtom } from "jotai";
-// import { PercentageRowbox } from "@/components/percentageRowbox";
+import { PercentageRowbox } from "@/components/percentageRowbox";
+import { dryBreaksleft, dryBreaksright } from "@/lib/recoil/atom/atom";
 
 const gameScoreLeftAtom = atom(0);
 const gameScoreRightAtom = atom(0);
@@ -25,6 +26,9 @@ const safetyErrorsLeftAtom = atom(0);
 const safetyErrorsRightAtom = atom(0);
 const kickingErrorsLeftAtom = atom(0);
 const kickingErrorsRightAtom = atom(0);
+
+const dryBreaksLeftAtom = atom(0);
+const dryBreaksRightAtom = atom(0);
 
 export default function Home() {
   const [gameScoreLeft, setGameScoreLeft] = useAtom(gameScoreLeftAtom);
@@ -67,6 +71,8 @@ export default function Home() {
   const [kickingErrorsRight, setKickingErrorsRight] = useAtom(
     kickingErrorsRightAtom
   );
+  const [dryBreaksLeft, setDryBreaksLeft] = useAtom(dryBreaksLeftAtom);
+  const [dryBreaksRight, setDryBreaksRight] = useAtom(dryBreaksRightAtom);
 
   return (
     <div className="w-full flex flex-col items-center justify-center bg-gray-100">
@@ -86,12 +92,12 @@ export default function Home() {
           setRightNumber={setTotalBreakRight}
           boxTitle="Total Break"
         />
-        {/* <PercentageRowbox
-          leftNumber={drLeftNumber}
-          rightNumber={drRightNumber}
+        <PercentageRowbox
+          leftNumber={dryBreaksLeft}
+          rightNumber={dryBreaksRight}
+          setLeftNumber={setDryBreaksLeft}
+          setRightNumber={setDryBreaksRight}
           boxTitle="Dry Breaks"
-          setLeftNumber={setDrLeftNumber}
-          setRightNumber={setDrRightNumber}
         />
         <PercentageRowbox
           leftNumber={0}
@@ -113,7 +119,7 @@ export default function Home() {
           leftNumber={0}
           rightNumber={0}
           boxTitle="Consecutive Break and Runs"
-        /> */}
+        />
         <Rowbox
           leftNumber={winningStreakLeft}
           rightNumber={winningStreakRight}
