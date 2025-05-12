@@ -1,5 +1,5 @@
 "use client";
-import { RowboxProps } from "@/types";
+import { RowboxProps } from "@/app/types";
 export const Rowbox = ({
   boxTitle,
   leftNumber,

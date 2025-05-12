@@ -1,15 +1,35 @@
 "use client";
-import { RowboxProps } from "@/types";
+
+import { RowboxProps } from "@/app/types";
+import { useAtom } from "jotai";
+import { totalBreakLeftAtom, totalBreakRightAtom } from "@/app/atom";
 
 export const PercentageRowbox = ({
   leftNumber,
-  leftPercentage,
   rightNumber,
-  rightPercentage,
   boxTitle,
   setLeftNumber,
   setRightNumber,
 }: RowboxProps) => {
+  const percentageLeftValue = () => {
+    // atom の値を取得するには[]を使う必要がある。[]がない、const totalBreakLeftValue = useAtom(totalBreakLeftAtom);は同じ物を変数に入れてるだけになる。
+    const [totalBreakLeftValue] = useAtom(totalBreakLeftAtom);
+    const leftOutPut = Math.round((leftNumber / totalBreakLeftValue) * 100);
+    if (leftNumber === 0 || leftOutPut < 0 || leftOutPut === Infinity) {
+      return 0;
+    }
+    return leftOutPut;
+  };
+
+  const percentageRightValue = () => {
+    const [totalBreakRightValue] = useAtom(totalBreakRightAtom);
+    const rightOutPut = Math.round((rightNumber / totalBreakRightValue) * 100);
+    if (rightNumber === 0 || rightOutPut < 0 || rightOutPut === Infinity) {
+      return 0;
+    }
+    return rightOutPut;
+  };
+
   const incrementLeft = () => {
     if (setLeftNumber === undefined) return;
     setLeftNumber(leftNumber + 1);
@@ -54,7 +74,7 @@ export const PercentageRowbox = ({
             {leftNumber}
           </div>
           <div className="border border-solid w-[50px] md:w-[100px] h-[45px] flex items-center justify-center">
-            {leftPercentage}
+            {percentageLeftValue() + "%"}
           </div>
         </div>
 
@@ -66,7 +86,7 @@ export const PercentageRowbox = ({
             {rightNumber}
           </div>
           <div className="border border-solid w-[50px] md:w-[100px] h-[45px] flex items-center justify-center">
-            {rightPercentage}
+            {percentageRightValue() + "%"}
           </div>
         </div>
 

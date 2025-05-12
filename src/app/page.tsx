@@ -6,29 +6,28 @@ import { AccuStats } from "./_components/accuStat";
 import { MissSafety } from "./_components/missSafety";
 import { atom, useAtom } from "jotai";
 import { PercentageRowbox } from "@/components/percentageRowbox";
-import { dryBreaksleft, dryBreaksright } from "@/lib/recoil/atom/atom";
-
-const gameScoreLeftAtom = atom(0);
-const gameScoreRightAtom = atom(0);
-const totalBreakLeftAtom = atom(0);
-const totalBreakRightAtom = atom(0);
-const winningStreakLeftAtom = atom(0);
-const winningStreakRightAtom = atom(0);
-const ballsPocketedLeftAtom = atom(0);
-const ballsPocketedRightAtom = atom(0);
-const ballsMissedLeftAtom = atom(0);
-const ballsMissedRightAtom = atom(0);
-const ballsMissedWithSafetyLeftAtom = atom(0);
-const ballsMissedWithSafetyRightAtom = atom(0);
-const unforcedErrorsLeftAtom = atom(0);
-const unforcedErrorsRightAtom = atom(0);
-const safetyErrorsLeftAtom = atom(0);
-const safetyErrorsRightAtom = atom(0);
-const kickingErrorsLeftAtom = atom(0);
-const kickingErrorsRightAtom = atom(0);
-
-const dryBreaksLeftAtom = atom(0);
-const dryBreaksRightAtom = atom(0);
+import {
+  ballsMissedLeftAtom,
+  ballsMissedRightAtom,
+  ballsMissedWithSafetyLeftAtom,
+  ballsMissedWithSafetyRightAtom,
+  ballsPocketedLeftAtom,
+  ballsPocketedRightAtom,
+  gameScoreLeftAtom,
+  gameScoreRightAtom,
+  totalBreakLeftAtom,
+  totalBreakRightAtom,
+  unforcedErrorsLeftAtom,
+  unforcedErrorsRightAtom,
+  winningStreakLeftAtom,
+  winningStreakRightAtom,
+  kickingErrorsLeftAtom,
+  kickingErrorsRightAtom,
+  safetyErrorsLeftAtom,
+  safetyErrorsRightAtom,
+  dryBreaksLeftAtom,
+  dryBreaksRightAtom,
+} from "./atom";
 
 export default function Home() {
   const [gameScoreLeft, setGameScoreLeft] = useAtom(gameScoreLeftAtom);

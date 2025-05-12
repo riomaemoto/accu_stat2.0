@@ -1,4 +1,4 @@
-import { RowboxProps } from "@/types";
+import { RowboxProps } from "@/app/types";
 
 export const AccuStats = ({
   leftNumber,
