@@ -22,3 +22,5 @@ export const kickingErrorsLeftAtom = atom(0);
 export const kickingErrorsRightAtom = atom(0);
 export const dryBreaksLeftAtom = atom(0);
 export const dryBreaksRightAtom = atom(0);
+export const scratchesonBreakLeftAtom = atom(0);
+export const scratchesonBreakRightAtom = atom(0);

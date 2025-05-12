@@ -11,20 +11,22 @@ export const PercentageRowbox = ({
   setLeftNumber,
   setRightNumber,
 }: RowboxProps) => {
+  // atom の値を取得するには[]を使う必要がある。[]がない、const totalBreakLeftValue = useAtom(totalBreakLeftAtom);は同じ物を変数に入れてるだけになる。
+
+  const [totalBreakLeftValue] = useAtom(totalBreakLeftAtom);
+  const [totalBreakRightValue] = useAtom(totalBreakRightAtom);
+
   const percentageLeftValue = () => {
-    // atom の値を取得するには[]を使う必要がある。[]がない、const totalBreakLeftValue = useAtom(totalBreakLeftAtom);は同じ物を変数に入れてるだけになる。
-    const [totalBreakLeftValue] = useAtom(totalBreakLeftAtom);
     const leftOutPut = Math.round((leftNumber / totalBreakLeftValue) * 100);
-    if (leftNumber === 0 || leftOutPut < 0 || leftOutPut === Infinity) {
+    if (!totalBreakLeftValue || totalBreakLeftValue === 0) {
       return 0;
     }
     return leftOutPut;
   };
 
   const percentageRightValue = () => {
-    const [totalBreakRightValue] = useAtom(totalBreakRightAtom);
     const rightOutPut = Math.round((rightNumber / totalBreakRightValue) * 100);
-    if (rightNumber === 0 || rightOutPut < 0 || rightOutPut === Infinity) {
+    if (!totalBreakRightValue || totalBreakRightValue === 0) {
       return 0;
     }
     return rightOutPut;

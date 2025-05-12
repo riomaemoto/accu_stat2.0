@@ -27,6 +27,8 @@ import {
   safetyErrorsRightAtom,
   dryBreaksLeftAtom,
   dryBreaksRightAtom,
+  scratchesonBreakLeftAtom,
+  scratchesonBreakRightAtom,
 } from "./atom";
 
 export default function Home() {
@@ -73,6 +75,13 @@ export default function Home() {
   const [dryBreaksLeft, setDryBreaksLeft] = useAtom(dryBreaksLeftAtom);
   const [dryBreaksRight, setDryBreaksRight] = useAtom(dryBreaksRightAtom);
 
+  const [scratchesonBreakLeft, setScratchesonBreakleft] = useAtom(
+    scratchesonBreakLeftAtom
+  );
+  const [scratchesonBreakRight, setScratchesonBreakRight] = useAtom(
+    scratchesonBreakRightAtom
+  );
+
   return (
     <div className="w-full flex flex-col items-center justify-center bg-gray-100">
       <div className="w-full max-w-[1400px] flex flex-col items-center justify-center p-5">
@@ -99,8 +108,10 @@ export default function Home() {
           boxTitle="Dry Breaks"
         />
         <PercentageRowbox
-          leftNumber={0}
-          rightNumber={0}
+          leftNumber={scratchesonBreakLeft}
+          rightNumber={scratchesonBreakRight}
+          setLeftNumber={setScratchesonBreakleft}
+          setRightNumber={setScratchesonBreakRight}
           boxTitle="Scratches on Break"
         />
         <PercentageRowbox
