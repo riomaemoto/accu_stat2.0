@@ -1,10 +1,23 @@
 import { RowboxProps } from "@/app/types";
+import {
+  ballsPocketedLeftAtom,
+  ballsPocketedRightAtom,
+  gameScoreLeftAtom,
+  gameScoreRightAtom,
+} from "../atom";
+import { useAtomValue } from "jotai";
 
-export const InGameStats = ({
-  leftNumber,
-  rightNumber,
-  inGameStats,
-}: RowboxProps) => {
+export const InGameStats = () => {
+  const gameScoreLeftValue = useAtomValue(gameScoreLeftAtom);
+  const gameScoreRightValue = useAtomValue(gameScoreRightAtom);
+  const inGameStatsLeft = gameScoreLeftValue * 9;
+  const inGameStatsRight = gameScoreRightValue * 9;
+  const totalInGameStats = inGameStatsLeft + inGameStatsRight;
+  const ballsPocketedLeftValue = useAtomValue(ballsPocketedLeftAtom);
+  const ballsPocketedRightValue = useAtomValue(ballsPocketedRightAtom);
+  const inGameStatsValue =
+    totalInGameStats - ballsPocketedLeftValue - ballsPocketedRightValue;
+
   return (
     <div className="w-full">
       <div className="w-full max-w-[1400px] flex flex-row  items-center justify-center">
@@ -16,31 +29,23 @@ export const InGameStats = ({
       </div>
       <div className="w-full max-w-[1400px] flex flex-row items-center justify-center">
         <div>
-          <button className="border border-solid w-[50px] h-[40px] md:h-[40px] flex items-center justify-center">
-            +
-          </button>
-          <button className="border border-solid w-[50px] h-[40px] md:h-[40px] flex items-center justify-center">
-            -
-          </button>
+          <button className="border border-solid w-[50px] h-[40px] md:h-[40px] flex items-center justify-center bg-sky-200"></button>
+          <button className="border border-solid w-[50px] h-[40px] md:h-[40px] flex items-center justify-center bg-sky-200"></button>
         </div>
 
         <div className="border border-solid w-[100px] h-[80px] flex items-center justify-center">
-          {leftNumber}
+          {inGameStatsValue}
         </div>
         <div className="border border-solid w-[250px] h-[80px] text-center flex items-center justify-center">
-          {inGameStats}
+          {totalInGameStats}
         </div>
 
         <div className="border border-solid w-[100px] h-[80px] flex items-center justify-center">
-          {rightNumber}
+          {inGameStatsValue}
         </div>
         <div>
-          <button className="border border-solid w-[50px] h-[40px] md:h-[40px] flex items-center justify-center">
-            +
-          </button>
-          <button className="border border-solid w-[50px] h-[40px] md:h-[40px] flex items-center justify-center">
-            -
-          </button>
+          <button className="border border-solid w-[50px] h-[40px] md:h-[40px] flex items-center justify-center bg-sky-200"></button>
+          <button className="border border-solid w-[50px] h-[40px] md:h-[40px] flex items-center justify-center bg-sky-200"></button>
         </div>
       </div>
     </div>

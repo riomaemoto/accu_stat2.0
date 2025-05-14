@@ -1,7 +1,7 @@
 "use client";
 
 import { RowboxProps } from "@/app/types";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { totalBreakLeftAtom, totalBreakRightAtom } from "@/app/atom";
 
 export const PercentageRowbox = ({
@@ -11,10 +11,9 @@ export const PercentageRowbox = ({
   setLeftNumber,
   setRightNumber,
 }: RowboxProps) => {
-  // atom の値を取得するには[]を使う必要がある。[]がない、const totalBreakLeftValue = useAtom(totalBreakLeftAtom);は同じ物を変数に入れてるだけになる。
-
-  const [totalBreakLeftValue] = useAtom(totalBreakLeftAtom);
-  const [totalBreakRightValue] = useAtom(totalBreakRightAtom);
+  // atom の値を取得するにはuseAtomValueを使う必要がある。const totalBreakLeftValue = useAtomValue(totalBreakLeftAtom);が正しい。
+  const totalBreakLeftValue = useAtomValue(totalBreakLeftAtom);
+  const totalBreakRightValue = useAtomValue(totalBreakRightAtom);
 
   const percentageLeftValue = () => {
     const leftOutPut = Math.round((leftNumber / totalBreakLeftValue) * 100);

@@ -4,7 +4,7 @@ import { Rowbox } from "../components/rowbox";
 import { InGameStats } from "./_components/inGameStats";
 import { AccuStats } from "./_components/accuStat";
 import { MissSafety } from "./_components/missSafety";
-import { atom, useAtom } from "jotai";
+import { useAtom } from "jotai";
 import { PercentageRowbox } from "@/components/percentageRowbox";
 import {
   ballsMissedLeftAtom,
@@ -29,6 +29,12 @@ import {
   dryBreaksRightAtom,
   scratchesonBreakLeftAtom,
   scratchesonBreakRightAtom,
+  ballsMadeonBreakLeftAtom,
+  ballsMadeonBreakRightAtom,
+  shotAfterTheBreakLeftAtom,
+  shotAfterTheBreakRightAtom,
+  consecutiveBreakandRunsRightAtom,
+  consecutiveBreakandRunsLeftAtom,
 } from "./atom";
 
 export default function Home() {
@@ -82,6 +88,28 @@ export default function Home() {
     scratchesonBreakRightAtom
   );
 
+  const [ballsMadeonBreakLeft, setBallsMadeonBreakLeft] = useAtom(
+    ballsMadeonBreakLeftAtom
+  );
+  const [ballsMadeonBreakRight, setBallsMadeonBreakRight] = useAtom(
+    ballsMadeonBreakRightAtom
+  );
+
+  const [shotAfterTheBreakLeft, setShotAfterTheBreakLeft] = useAtom(
+    shotAfterTheBreakLeftAtom
+  );
+
+  const [shotAfterTheBreakRight, setShotAfterTheBreakRight] = useAtom(
+    shotAfterTheBreakRightAtom
+  );
+
+  const [consecutiveBreakandRunsLeft, setConsecutiveBreakandRunsLeft] = useAtom(
+    consecutiveBreakandRunsLeftAtom
+  );
+
+  const [consecutiveBreakandRunsRight, setConsecutiveBreakandRunsRight] =
+    useAtom(consecutiveBreakandRunsRightAtom);
+
   return (
     <div className="w-full flex flex-col items-center justify-center bg-gray-100">
       <div className="w-full max-w-[1400px] flex flex-col items-center justify-center p-5">
@@ -115,19 +143,25 @@ export default function Home() {
           boxTitle="Scratches on Break"
         />
         <PercentageRowbox
-          leftNumber={0}
-          rightNumber={0}
+          leftNumber={ballsMadeonBreakLeft}
+          rightNumber={ballsMadeonBreakRight}
+          setLeftNumber={setBallsMadeonBreakLeft}
+          setRightNumber={setBallsMadeonBreakRight}
           boxTitle="Ball Made on Break"
         />
         <PercentageRowbox
-          leftNumber={0}
-          rightNumber={0}
+          leftNumber={shotAfterTheBreakLeft}
+          rightNumber={shotAfterTheBreakRight}
+          setLeftNumber={setShotAfterTheBreakLeft}
+          setRightNumber={setShotAfterTheBreakRight}
           boxTitle="Shot After The Break"
         />
         <Rowbox leftNumber={0} rightNumber={0} boxTitle="Break and Run" />
         <PercentageRowbox
-          leftNumber={0}
-          rightNumber={0}
+          leftNumber={consecutiveBreakandRunsLeft}
+          rightNumber={consecutiveBreakandRunsRight}
+          setLeftNumber={setConsecutiveBreakandRunsLeft}
+          setRightNumber={setConsecutiveBreakandRunsRight}
           boxTitle="Consecutive Break and Runs"
         />
         <Rowbox
@@ -137,7 +171,7 @@ export default function Home() {
           setRightNumber={setWinningStreakRight}
           boxTitle="Longest Game Winning Streak"
         />
-        <InGameStats leftNumber={0} rightNumber={0} inGameStats={20} />
+        <InGameStats />
         <Rowbox
           leftNumber={ballsPocketedLeft}
           rightNumber={ballsPocketedRight}
