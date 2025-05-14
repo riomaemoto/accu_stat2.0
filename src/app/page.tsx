@@ -214,7 +214,7 @@ export default function Home() {
           setRightNumber={setKickingErrorsRight}
           boxTitle="Kicking Errors"
         />
-        <AccuStats leftNumber={0} rightNumber={0} boxTitle="ACCU-STAT" />
+        <AccuStats />
         <MissSafety
           leftNumber={0}
           rightNumber={0}
