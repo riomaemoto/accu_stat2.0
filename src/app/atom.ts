@@ -30,3 +30,5 @@ export const shotAfterTheBreakLeftAtom = atom(0);
 export const shotAfterTheBreakRightAtom = atom(0);
 export const consecutiveBreakandRunsLeftAtom = atom(0);
 export const consecutiveBreakandRunsRightAtom = atom(0);
+export const breakAndRunLeftAtom = atom(0);
+export const breakAndRunRightAtom = atom(0);

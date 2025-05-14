@@ -35,6 +35,8 @@ import {
   shotAfterTheBreakRightAtom,
   consecutiveBreakandRunsRightAtom,
   consecutiveBreakandRunsLeftAtom,
+  breakAndRunLeftAtom,
+  breakAndRunRightAtom,
 } from "./atom";
 
 export default function Home() {
@@ -110,6 +112,9 @@ export default function Home() {
   const [consecutiveBreakandRunsRight, setConsecutiveBreakandRunsRight] =
     useAtom(consecutiveBreakandRunsRightAtom);
 
+  const [breakAndRunLeft, setBreakAndRunLeft] = useAtom(breakAndRunLeftAtom);
+  const [breakAndRunRight, setBreakAndRunRight] = useAtom(breakAndRunRightAtom);
+
   return (
     <div className="w-full flex flex-col items-center justify-center bg-gray-100">
       <div className="w-full max-w-[1400px] flex flex-col items-center justify-center p-5">
@@ -156,7 +161,13 @@ export default function Home() {
           setRightNumber={setShotAfterTheBreakRight}
           boxTitle="Shot After The Break"
         />
-        <Rowbox leftNumber={0} rightNumber={0} boxTitle="Break and Run" />
+        <Rowbox
+          leftNumber={breakAndRunLeft}
+          rightNumber={breakAndRunRight}
+          setLeftNumber={setBreakAndRunLeft}
+          setRightNumber={setBreakAndRunRight}
+          boxTitle="Break and Run"
+        />
         <PercentageRowbox
           leftNumber={consecutiveBreakandRunsLeft}
           rightNumber={consecutiveBreakandRunsRight}
