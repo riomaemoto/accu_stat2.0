@@ -1,4 +1,3 @@
-import { RowboxProps } from "@/app/types";
 import {
   ballsPocketedLeftAtom,
   ballsPocketedRightAtom,

@@ -1,4 +1,3 @@
-import { RowboxProps } from "@/app/types";
 import {
   ballsMissedLeftAtom,
   ballsMissedRightAtom,
@@ -33,7 +32,8 @@ export const AccuStats = () => {
       ballsPocketedLeft -
     1;
 
-  const accuStatLeftValue = Math.max(0, Math.round(accuStatLeft * 100));
+  const accuStatLeftValue =
+    ballsPocketedLeft > 0 ? Math.max(0, Math.round(accuStatLeft * 100)) : 0;
 
   const accuStatRight =
     (ballsMissedRight +
@@ -42,7 +42,8 @@ export const AccuStats = () => {
       kickingErrorsRight) /
       ballsPocketedRight -
     1;
-  const accuStatRightValue = Math.max(0, Math.round(accuStatRight * 100));
+  const accuStatRightValue =
+    ballsPocketedRight > 0 ? Math.max(0, Math.round(accuStatRight * 100)) : 0;
 
   return (
     <div className="w-full flex">
@@ -55,7 +56,7 @@ export const AccuStats = () => {
         </div>
 
         <div className="border border-solid w-[100px] h-[80px] flex items-center justify-center">
-          {isNaN(accuStatRightValue) ? "N/A" : accuStatRightValue}
+          {accuStatRightValue}
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { RowboxProps } from "@/app/types";
-import { useAtom, useAtomValue } from "jotai";
+import { useAtomValue } from "jotai";
 import { totalBreakLeftAtom, totalBreakRightAtom } from "@/app/atom";
 
 export const PercentageRowbox = ({
