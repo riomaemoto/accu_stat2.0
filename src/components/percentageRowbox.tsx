@@ -71,10 +71,10 @@ export const PercentageRowbox = ({
         </div>
 
         <div>
-          <div className="border border-solid w-[50px] md:w-[100px] h-[45px] flex items-center justify-center">
+          <div className="border border-solid w-[55px] md:w-[100px] h-[45px] flex items-center justify-center">
             {leftNumber}
           </div>
-          <div className="border border-solid w-[50px] md:w-[100px] h-[45px] flex items-center justify-center">
+          <div className="border border-solid w-[55px] md:w-[100px] h-[45px] flex items-center justify-center">
             {percentageLeftValue() + "%"}
           </div>
         </div>
@@ -83,10 +83,10 @@ export const PercentageRowbox = ({
           {boxTitle}
         </div>
         <div>
-          <div className="border border-solid w-[50px] md:w-[100px] h-[45px] flex items-center justify-center">
+          <div className="border border-solid w-[55px] md:w-[100px] h-[45px] flex items-center justify-center">
             {rightNumber}
           </div>
-          <div className="border border-solid w-[50px] md:w-[100px] h-[45px] flex items-center justify-center">
+          <div className="border border-solid w-[55px] md:w-[100px] h-[45px] flex items-center justify-center">
             {percentageRightValue() + "%"}
           </div>
         </div>
