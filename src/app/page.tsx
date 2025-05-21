@@ -161,7 +161,7 @@ export default function Home() {
           setRightNumber={setShotAfterTheBreakRight}
           boxTitle="Shot After The Break"
         />
-        <Rowbox
+        <PercentageRowbox
           leftNumber={breakAndRunLeft}
           rightNumber={breakAndRunRight}
           setLeftNumber={setBreakAndRunLeft}
