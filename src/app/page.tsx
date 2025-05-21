@@ -3,7 +3,7 @@ import { Toprow } from "./_components/toprow";
 import { Rowbox } from "../components/rowbox";
 import { InGameStats } from "./_components/inGameStats";
 import { AccuStats } from "./_components/accuStat";
-import { MissSafety } from "./_components/missSafety";
+import { AccuStatWithMissSafety } from "./_components/accuStatWithMissSafety";
 import { useAtom } from "jotai";
 import { PercentageRowbox } from "@/components/percentageRowbox";
 import {
@@ -226,11 +226,7 @@ export default function Home() {
           boxTitle="Kicking Errors"
         />
         <AccuStats />
-        <MissSafety
-          leftNumber={0}
-          rightNumber={0}
-          boxTitle="ACCU-STAT with Miss Safety"
-        />
+        <AccuStatWithMissSafety />
       </div>
     </div>
   );

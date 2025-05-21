@@ -1,6 +1,8 @@
 import {
   ballsMissedLeftAtom,
   ballsMissedRightAtom,
+  ballsMissedWithSafetyLeftAtom,
+  ballsMissedWithSafetyRightAtom,
   ballsPocketedLeftAtom,
   ballsPocketedRightAtom,
   kickingErrorsLeftAtom,
@@ -12,7 +14,7 @@ import {
 } from "../atom";
 import { useAtomValue } from "jotai";
 
-export const AccuStats = () => {
+export const AccuStatWithMissSafety = () => {
   const ballsMissedLeft = useAtomValue(ballsMissedLeftAtom);
   const ballsMissedRight = useAtomValue(ballsMissedRightAtom);
   const unforcedErrorsLeft = useAtomValue(unforcedErrorsLeftAtom);
@@ -23,6 +25,10 @@ export const AccuStats = () => {
   const ballsPocketedRight = useAtomValue(ballsPocketedRightAtom);
   const kickingErrorsLeft = useAtomValue(kickingErrorsLeftAtom);
   const kickingErrorsRight = useAtomValue(kickingErrorsRightAtom);
+  const ballsMissedWithSafetyLeft = useAtomValue(ballsMissedWithSafetyLeftAtom);
+  const ballsMissedWithSafetyRight = useAtomValue(
+    ballsMissedWithSafetyRightAtom
+  );
 
   const accuStatLeft =
     ballsPocketedLeft /
@@ -30,7 +36,8 @@ export const AccuStats = () => {
       ballsMissedLeft +
       unforcedErrorsLeft +
       safetyErrorsLeft +
-      kickingErrorsLeft);
+      kickingErrorsLeft +
+      ballsMissedWithSafetyLeft);
 
   const accuStatRight =
     ballsPocketedRight /
@@ -38,7 +45,8 @@ export const AccuStats = () => {
       ballsMissedRight +
       unforcedErrorsRight +
       safetyErrorsRight +
-      kickingErrorsRight);
+      kickingErrorsRight +
+      ballsMissedWithSafetyRight);
 
   return (
     <div className="w-full flex">
@@ -47,7 +55,7 @@ export const AccuStats = () => {
           {isNaN(accuStatLeft) ? 0 : accuStatLeft.toFixed(3)}
         </div>
         <div className="border border-solid w-[250px] h-[80px] text-center flex items-center justify-center bg-sky-200">
-          ACCU STAT
+          ACCU-STAT with Miss Safety
         </div>
 
         <div className="border border-solid w-[100px] h-[80px] flex items-center justify-center">
