@@ -1,34 +1,141 @@
 "use client";
 
 import { atom } from "jotai";
+import { focusAtom } from "jotai-optics";
 
-export const gameScoreLeftAtom = atom(0);
-export const gameScoreRightAtom = atom(0);
-export const totalBreakLeftAtom = atom(0);
-export const totalBreakRightAtom = atom(0);
-export const winningStreakLeftAtom = atom(0);
-export const winningStreakRightAtom = atom(0);
-export const ballsPocketedLeftAtom = atom(0);
-export const ballsPocketedRightAtom = atom(0);
-export const ballsMissedLeftAtom = atom(0);
-export const ballsMissedRightAtom = atom(0);
-export const ballsMissedWithSafetyLeftAtom = atom(0);
-export const ballsMissedWithSafetyRightAtom = atom(0);
-export const unforcedErrorsLeftAtom = atom(0);
-export const unforcedErrorsRightAtom = atom(0);
-export const safetyErrorsLeftAtom = atom(0);
-export const safetyErrorsRightAtom = atom(0);
-export const kickingErrorsLeftAtom = atom(0);
-export const kickingErrorsRightAtom = atom(0);
-export const dryBreaksLeftAtom = atom(0);
-export const dryBreaksRightAtom = atom(0);
-export const scratchesonBreakLeftAtom = atom(0);
-export const scratchesonBreakRightAtom = atom(0);
-export const ballsMadeonBreakLeftAtom = atom(0);
-export const ballsMadeonBreakRightAtom = atom(0);
-export const shotAfterTheBreakLeftAtom = atom(0);
-export const shotAfterTheBreakRightAtom = atom(0);
-export const consecutiveBreakandRunsLeftAtom = atom(0);
-export const consecutiveBreakandRunsRightAtom = atom(0);
-export const breakAndRunLeftAtom = atom(0);
-export const breakAndRunRightAtom = atom(0);
+type StatType = {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  player1: string;
+  player2: string;
+  gameScore: { left: number; right: number };
+  totalBreak: { left: number; right: number };
+  winningStreak: { left: number; right: number };
+  ballsPocketed: { left: number; right: number };
+  ballsMissed: { left: number; right: number };
+  ballsMissedWithSafety: { left: number; right: number };
+  unforcedErrors: { left: number; right: number };
+  safetyErrors: { left: number; right: number };
+  kickingErrors: { left: number; right: number };
+  dryBreaks: { left: number; right: number };
+  scratchesonBreak: { left: number; right: number };
+  ballsMadeonBreak: { left: number; right: number };
+  shotAfterTheBreak: { left: number; right: number };
+  consecutiveBreakandRuns: { left: number; right: number };
+  breakAndRun: { left: number; right: number };
+};
+
+export const statAtom = atom<StatType>({
+  id: 0,
+  createdAt: "",
+  updatedAt: "",
+  player1: "",
+  player2: "",
+  gameScore: { left: 0, right: 0 },
+  totalBreak: { left: 0, right: 0 },
+  winningStreak: { left: 0, right: 0 },
+  ballsPocketed: { left: 0, right: 0 },
+  ballsMissed: { left: 0, right: 0 },
+  ballsMissedWithSafety: { left: 0, right: 0 },
+  unforcedErrors: { left: 0, right: 0 },
+  safetyErrors: { left: 0, right: 0 },
+  kickingErrors: { left: 0, right: 0 },
+  dryBreaks: { left: 0, right: 0 },
+  scratchesonBreak: { left: 0, right: 0 },
+  ballsMadeonBreak: { left: 0, right: 0 },
+  shotAfterTheBreak: { left: 0, right: 0 },
+  consecutiveBreakandRuns: { left: 0, right: 0 },
+  breakAndRun: { left: 0, right: 0 },
+});
+
+export const gameScoreLeftAtom = focusAtom(statAtom, (optic) =>
+  optic.prop("gameScore").prop("left")
+);
+export const gameScoreRightAtom = focusAtom(statAtom, (optic) =>
+  optic.prop("gameScore").prop("right")
+);
+export const totalBreakLeftAtom = focusAtom(statAtom, (optic) =>
+  optic.prop("totalBreak").prop("left")
+);
+export const totalBreakRightAtom = focusAtom(statAtom, (optic) =>
+  optic.prop("totalBreak").prop("right")
+);
+export const winningStreakLeftAtom = focusAtom(statAtom, (optic) =>
+  optic.prop("winningStreak").prop("left")
+);
+export const winningStreakRightAtom = focusAtom(statAtom, (optic) =>
+  optic.prop("winningStreak").prop("right")
+);
+export const ballsPocketedLeftAtom = focusAtom(statAtom, (optic) =>
+  optic.prop("ballsPocketed").prop("left")
+);
+export const ballsPocketedRightAtom = focusAtom(statAtom, (optic) =>
+  optic.prop("ballsPocketed").prop("right")
+);
+export const ballsMissedLeftAtom = focusAtom(statAtom, (optic) =>
+  optic.prop("ballsMissed").prop("left")
+);
+export const ballsMissedRightAtom = focusAtom(statAtom, (optic) =>
+  optic.prop("ballsMissed").prop("right")
+);
+export const ballsMissedWithSafetyLeftAtom = focusAtom(statAtom, (optic) =>
+  optic.prop("ballsMissedWithSafety").prop("left")
+);
+export const ballsMissedWithSafetyRightAtom = focusAtom(statAtom, (optic) =>
+  optic.prop("ballsMissedWithSafety").prop("right")
+);
+export const unforcedErrorsLeftAtom = focusAtom(statAtom, (optic) =>
+  optic.prop("unforcedErrors").prop("left")
+);
+export const unforcedErrorsRightAtom = focusAtom(statAtom, (optic) =>
+  optic.prop("unforcedErrors").prop("right")
+);
+export const safetyErrorsLeftAtom = focusAtom(statAtom, (optic) =>
+  optic.prop("safetyErrors").prop("left")
+);
+export const safetyErrorsRightAtom = focusAtom(statAtom, (optic) =>
+  optic.prop("safetyErrors").prop("right")
+);
+export const kickingErrorsLeftAtom = focusAtom(statAtom, (optic) =>
+  optic.prop("kickingErrors").prop("left")
+);
+export const kickingErrorsRightAtom = focusAtom(statAtom, (optic) =>
+  optic.prop("kickingErrors").prop("right")
+);
+export const dryBreaksLeftAtom = focusAtom(statAtom, (optic) =>
+  optic.prop("dryBreaks").prop("left")
+);
+export const dryBreaksRightAtom = focusAtom(statAtom, (optic) =>
+  optic.prop("dryBreaks").prop("right")
+);
+export const scratchesonBreakLeftAtom = focusAtom(statAtom, (optic) =>
+  optic.prop("scratchesonBreak").prop("left")
+);
+export const scratchesonBreakRightAtom = focusAtom(statAtom, (optic) =>
+  optic.prop("scratchesonBreak").prop("right")
+);
+export const ballsMadeonBreakLeftAtom = focusAtom(statAtom, (optic) =>
+  optic.prop("ballsMadeonBreak").prop("left")
+);
+export const ballsMadeonBreakRightAtom = focusAtom(statAtom, (optic) =>
+  optic.prop("ballsMadeonBreak").prop("right")
+);
+export const shotAfterTheBreakLeftAtom = focusAtom(statAtom, (optic) =>
+  optic.prop("shotAfterTheBreak").prop("left")
+);
+export const shotAfterTheBreakRightAtom = focusAtom(statAtom, (optic) =>
+  optic.prop("shotAfterTheBreak").prop("right")
+);
+export const consecutiveBreakandRunsLeftAtom = focusAtom(statAtom, (optic) =>
+  optic.prop("consecutiveBreakandRuns").prop("left")
+);
+export const consecutiveBreakandRunsRightAtom = focusAtom(statAtom, (optic) =>
+  optic.prop("consecutiveBreakandRuns").prop("right")
+);
+export const breakAndRunLeftAtom = focusAtom(statAtom, (optic) =>
+  optic.prop("breakAndRun").prop("left")
+);
+export const breakAndRunRightAtom = focusAtom(statAtom, (optic) =>
+  optic.prop("breakAndRun").prop("right")
+);
