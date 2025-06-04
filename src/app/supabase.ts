@@ -6,11 +6,14 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-export const insertStat = async (sendData: StatType) => {
-  const query = supabase.from("statistics").insert(sendData).select("*");
-  const { data, error } = await query;
+export const sendSupabase = async (sendData: StatType) => {
+  await supabase.from("stats_list").insert(sendData);
+};
 
-  if (error || !data) return null;
-  const res = data[0] as StatType;
-  return res ? res : null;
+export const getSupabase = async () => {
+  const { data } = await supabase
+    .from("stats_list")
+    .select("*")
+    .order("id", { ascending: true });
+  return data ? (data as StatType[]) : null;
 };
