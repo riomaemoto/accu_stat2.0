@@ -1,12 +1,16 @@
 "use client";
-import { RowboxProps } from "@/app/types";
-export const Rowbox = ({
-  boxTitle,
-  leftNumber,
-  setLeftNumber,
-  setRightNumber,
-  rightNumber,
-}: RowboxProps) => {
+import { PrimitiveAtom, useAtom } from "jotai";
+
+type Props = {
+  boxTitle: string;
+  left: PrimitiveAtom<number>;
+  right: PrimitiveAtom<number>;
+};
+
+export const Rowbox = ({ boxTitle, left, right }: Props) => {
+  const [leftNumber, setLeftNumber] = useAtom(left);
+  const [rightNumber, setRightNumber] = useAtom(right);
+
   const incrementLeft = () => {
     if (setLeftNumber === undefined) return;
     setLeftNumber(leftNumber + 1);

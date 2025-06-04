@@ -1,9 +1,9 @@
 import {
-  ballsPocketedLeftAtom,
-  ballsPocketedRightAtom,
   gameScoreLeftAtom,
   gameScoreRightAtom,
-} from "../atom";
+  ballsPocketedLeftAtom,
+  ballsPocketedRightAtom,
+} from "@/app/atom";
 import { useAtomValue } from "jotai";
 
 export const InGameStats = () => {

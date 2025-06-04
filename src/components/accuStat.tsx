@@ -1,8 +1,6 @@
 import {
   ballsMissedLeftAtom,
   ballsMissedRightAtom,
-  ballsMissedWithSafetyLeftAtom,
-  ballsMissedWithSafetyRightAtom,
   ballsPocketedLeftAtom,
   ballsPocketedRightAtom,
   kickingErrorsLeftAtom,
@@ -11,10 +9,10 @@ import {
   safetyErrorsRightAtom,
   unforcedErrorsLeftAtom,
   unforcedErrorsRightAtom,
-} from "../atom";
+} from "@/app/atom";
 import { useAtomValue } from "jotai";
 
-export const AccuStatWithMissSafety = () => {
+export const AccuStats = () => {
   const ballsMissedLeft = useAtomValue(ballsMissedLeftAtom);
   const ballsMissedRight = useAtomValue(ballsMissedRightAtom);
   const unforcedErrorsLeft = useAtomValue(unforcedErrorsLeftAtom);
@@ -25,10 +23,6 @@ export const AccuStatWithMissSafety = () => {
   const ballsPocketedRight = useAtomValue(ballsPocketedRightAtom);
   const kickingErrorsLeft = useAtomValue(kickingErrorsLeftAtom);
   const kickingErrorsRight = useAtomValue(kickingErrorsRightAtom);
-  const ballsMissedWithSafetyLeft = useAtomValue(ballsMissedWithSafetyLeftAtom);
-  const ballsMissedWithSafetyRight = useAtomValue(
-    ballsMissedWithSafetyRightAtom
-  );
 
   const accuStatLeft =
     ballsPocketedLeft /
@@ -36,8 +30,7 @@ export const AccuStatWithMissSafety = () => {
       ballsMissedLeft +
       unforcedErrorsLeft +
       safetyErrorsLeft +
-      kickingErrorsLeft +
-      ballsMissedWithSafetyLeft);
+      kickingErrorsLeft);
 
   const accuStatRight =
     ballsPocketedRight /
@@ -45,8 +38,7 @@ export const AccuStatWithMissSafety = () => {
       ballsMissedRight +
       unforcedErrorsRight +
       safetyErrorsRight +
-      kickingErrorsRight +
-      ballsMissedWithSafetyRight);
+      kickingErrorsRight);
 
   return (
     <div className="w-full flex">
@@ -55,7 +47,7 @@ export const AccuStatWithMissSafety = () => {
           {isNaN(accuStatLeft) ? 0 : accuStatLeft.toFixed(3)}
         </div>
         <div className="border border-solid w-[250px] h-[80px] text-center flex items-center justify-center bg-sky-200">
-          ACCU-STAT with Miss Safety
+          ACCU STAT
         </div>
 
         <div className="border border-solid w-[100px] h-[80px] flex items-center justify-center">

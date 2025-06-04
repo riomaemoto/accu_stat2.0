@@ -1,10 +1,5 @@
 "use client";
-import { Toprow } from "./_components/toprow";
-import { Rowbox } from "../components/rowbox";
-import { InGameStats } from "./_components/inGameStats";
-import { AccuStats } from "./_components/accuStat";
-import { AccuStatWithMissSafety } from "./_components/accuStatWithMissSafety";
-import { useAtom } from "jotai";
+
 import { PercentageRowbox } from "@/components/percentageRowbox";
 import {
   ballsMissedLeftAtom,
@@ -33,197 +28,97 @@ import {
   ballsMadeonBreakRightAtom,
   shotAfterTheBreakLeftAtom,
   shotAfterTheBreakRightAtom,
-  consecutiveBreakandRunsRightAtom,
-  consecutiveBreakandRunsLeftAtom,
   breakAndRunLeftAtom,
   breakAndRunRightAtom,
+  consecutiveBreakandRunsLeftAtom,
+  consecutiveBreakandRunsRightAtom,
 } from "./atom";
+import { AccuStats } from "@/components/accuStat";
+import { AccuStatWithMissSafety } from "@/components/accuStatWithMissSafety";
+import { Rowbox } from "@/components/rowbox";
+import { InGameStats } from "@/components/inGameStats";
+import { Toprow } from "@/components/toprow";
 
 export default function Home() {
-  const [gameScoreLeft, setGameScoreLeft] = useAtom(gameScoreLeftAtom);
-  const [gameScoreRight, setGameScoreRight] = useAtom(gameScoreRightAtom);
-  const [totalBreakLeft, setTotalBreakLeft] = useAtom(totalBreakLeftAtom);
-  const [totalBreakRight, setTotalBreakRight] = useAtom(totalBreakRightAtom);
-  const [winningStreakLeft, setWinningStreakLeft] = useAtom(
-    winningStreakLeftAtom
-  );
-  const [winningStreakRight, setWinningStreakRight] = useAtom(
-    winningStreakRightAtom
-  );
-  const [ballsPocketedLeft, setBallsPocketedLeft] = useAtom(
-    ballsPocketedLeftAtom
-  );
-  const [ballsPocketedRight, setBallsPocketedRight] = useAtom(
-    ballsPocketedRightAtom
-  );
-  const [ballsMissedLeft, setBallsMissedLeft] = useAtom(ballsMissedLeftAtom);
-  const [ballsMissedRight, setBallsMissedRight] = useAtom(ballsMissedRightAtom);
-  const [ballsMissedWithSafetyLeft, setBallsMissedWithSafetyLeft] = useAtom(
-    ballsMissedWithSafetyLeftAtom
-  );
-  const [ballsMissedWithSafetyRight, setBallsMissedWithSafetyRight] = useAtom(
-    ballsMissedWithSafetyRightAtom
-  );
-  const [unforcedErrorsLeft, setUnforcedErrorsLeft] = useAtom(
-    unforcedErrorsLeftAtom
-  );
-  const [unforcedErrorsRight, setUnforcedErrorsRight] = useAtom(
-    unforcedErrorsRightAtom
-  );
-  const [safetyErrorsLeft, setSafetyErrorsLeft] = useAtom(safetyErrorsLeftAtom);
-  const [safetyErrorsRight, setSafetyErrorsRight] = useAtom(
-    safetyErrorsRightAtom
-  );
-  const [kickingErrorslLeft, setKickingErrorsLeft] = useAtom(
-    kickingErrorsLeftAtom
-  );
-  const [kickingErrorsRight, setKickingErrorsRight] = useAtom(
-    kickingErrorsRightAtom
-  );
-  const [dryBreaksLeft, setDryBreaksLeft] = useAtom(dryBreaksLeftAtom);
-  const [dryBreaksRight, setDryBreaksRight] = useAtom(dryBreaksRightAtom);
-
-  const [scratchesonBreakLeft, setScratchesonBreakleft] = useAtom(
-    scratchesonBreakLeftAtom
-  );
-  const [scratchesonBreakRight, setScratchesonBreakRight] = useAtom(
-    scratchesonBreakRightAtom
-  );
-
-  const [ballsMadeonBreakLeft, setBallsMadeonBreakLeft] = useAtom(
-    ballsMadeonBreakLeftAtom
-  );
-  const [ballsMadeonBreakRight, setBallsMadeonBreakRight] = useAtom(
-    ballsMadeonBreakRightAtom
-  );
-
-  const [shotAfterTheBreakLeft, setShotAfterTheBreakLeft] = useAtom(
-    shotAfterTheBreakLeftAtom
-  );
-
-  const [shotAfterTheBreakRight, setShotAfterTheBreakRight] = useAtom(
-    shotAfterTheBreakRightAtom
-  );
-
-  const [consecutiveBreakandRunsLeft, setConsecutiveBreakandRunsLeft] = useAtom(
-    consecutiveBreakandRunsLeftAtom
-  );
-
-  const [consecutiveBreakandRunsRight, setConsecutiveBreakandRunsRight] =
-    useAtom(consecutiveBreakandRunsRightAtom);
-
-  const [breakAndRunLeft, setBreakAndRunLeft] = useAtom(breakAndRunLeftAtom);
-  const [breakAndRunRight, setBreakAndRunRight] = useAtom(breakAndRunRightAtom);
-
   return (
     <div className="w-full flex flex-col items-center justify-center bg-gray-100">
       <div className="w-full max-w-[1400px] flex flex-col items-center justify-center p-5">
         <Toprow />
         <Rowbox
-          leftNumber={gameScoreLeft}
-          rightNumber={gameScoreRight}
-          setLeftNumber={setGameScoreLeft}
-          setRightNumber={setGameScoreRight}
           boxTitle="Game Score"
+          left={gameScoreLeftAtom}
+          right={gameScoreRightAtom}
         />
         <Rowbox
-          leftNumber={totalBreakLeft}
-          rightNumber={totalBreakRight}
-          setLeftNumber={setTotalBreakLeft}
-          setRightNumber={setTotalBreakRight}
           boxTitle="Total Break"
+          left={totalBreakLeftAtom}
+          right={totalBreakRightAtom}
         />
         <PercentageRowbox
-          leftNumber={dryBreaksLeft}
-          rightNumber={dryBreaksRight}
-          setLeftNumber={setDryBreaksLeft}
-          setRightNumber={setDryBreaksRight}
           boxTitle="Dry Breaks"
+          left={dryBreaksLeftAtom}
+          right={dryBreaksRightAtom}
         />
         <PercentageRowbox
-          leftNumber={scratchesonBreakLeft}
-          rightNumber={scratchesonBreakRight}
-          setLeftNumber={setScratchesonBreakleft}
-          setRightNumber={setScratchesonBreakRight}
           boxTitle="Scratches on Break"
+          left={scratchesonBreakLeftAtom}
+          right={scratchesonBreakRightAtom}
         />
         <PercentageRowbox
-          leftNumber={ballsMadeonBreakLeft}
-          rightNumber={ballsMadeonBreakRight}
-          setLeftNumber={setBallsMadeonBreakLeft}
-          setRightNumber={setBallsMadeonBreakRight}
           boxTitle="Ball Made on Break"
+          left={ballsMadeonBreakLeftAtom}
+          right={ballsMadeonBreakRightAtom}
         />
         <PercentageRowbox
-          leftNumber={shotAfterTheBreakLeft}
-          rightNumber={shotAfterTheBreakRight}
-          setLeftNumber={setShotAfterTheBreakLeft}
-          setRightNumber={setShotAfterTheBreakRight}
+          left={shotAfterTheBreakLeftAtom}
+          right={shotAfterTheBreakRightAtom}
           boxTitle="Shot After The Break"
         />
         <PercentageRowbox
-          leftNumber={breakAndRunLeft}
-          rightNumber={breakAndRunRight}
-          setLeftNumber={setBreakAndRunLeft}
-          setRightNumber={setBreakAndRunRight}
+          left={breakAndRunLeftAtom}
+          right={breakAndRunRightAtom}
           boxTitle="Break and Run"
         />
         <PercentageRowbox
-          leftNumber={consecutiveBreakandRunsLeft}
-          rightNumber={consecutiveBreakandRunsRight}
-          setLeftNumber={setConsecutiveBreakandRunsLeft}
-          setRightNumber={setConsecutiveBreakandRunsRight}
+          left={consecutiveBreakandRunsLeftAtom}
+          right={consecutiveBreakandRunsRightAtom}
           boxTitle="Consecutive Break and Runs"
         />
         <Rowbox
-          leftNumber={winningStreakLeft}
-          rightNumber={winningStreakRight}
-          setLeftNumber={setWinningStreakLeft}
-          setRightNumber={setWinningStreakRight}
           boxTitle="Longest Game Winning Streak"
+          left={winningStreakLeftAtom}
+          right={winningStreakRightAtom}
         />
         <InGameStats />
         <Rowbox
-          leftNumber={ballsPocketedLeft}
-          rightNumber={ballsPocketedRight}
-          setLeftNumber={setBallsPocketedLeft}
-          setRightNumber={setBallsPocketedRight}
           boxTitle="Balls Pocketed"
+          left={ballsPocketedLeftAtom}
+          right={ballsPocketedRightAtom}
         />
         <Rowbox
-          leftNumber={ballsMissedLeft}
-          rightNumber={ballsMissedRight}
-          setLeftNumber={setBallsMissedLeft}
-          setRightNumber={setBallsMissedRight}
           boxTitle="Balls Missed"
+          left={ballsMissedLeftAtom}
+          right={ballsMissedRightAtom}
         />
         <Rowbox
-          leftNumber={ballsMissedWithSafetyLeft}
-          rightNumber={ballsMissedWithSafetyRight}
-          setLeftNumber={setBallsMissedWithSafetyLeft}
-          setRightNumber={setBallsMissedWithSafetyRight}
           boxTitle="Balls Missed with safety"
+          left={ballsMissedWithSafetyLeftAtom}
+          right={ballsMissedWithSafetyRightAtom}
         />
         <Rowbox
-          leftNumber={unforcedErrorsLeft}
-          rightNumber={unforcedErrorsRight}
-          setLeftNumber={setUnforcedErrorsLeft}
-          setRightNumber={setUnforcedErrorsRight}
           boxTitle="Unforced Errors"
+          left={unforcedErrorsLeftAtom}
+          right={unforcedErrorsRightAtom}
         />
         <Rowbox
-          leftNumber={safetyErrorsLeft}
-          rightNumber={safetyErrorsRight}
-          setLeftNumber={setSafetyErrorsLeft}
-          setRightNumber={setSafetyErrorsRight}
           boxTitle="Safety Errors"
+          left={safetyErrorsLeftAtom}
+          right={safetyErrorsRightAtom}
         />
         <Rowbox
-          leftNumber={kickingErrorslLeft}
-          rightNumber={kickingErrorsRight}
-          setLeftNumber={setKickingErrorsLeft}
-          setRightNumber={setKickingErrorsRight}
           boxTitle="Kicking Errors"
+          left={kickingErrorsLeftAtom}
+          right={kickingErrorsRightAtom}
         />
         <AccuStats />
         <AccuStatWithMissSafety />

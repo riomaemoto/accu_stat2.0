@@ -1,17 +1,17 @@
 "use client";
 
-import { RowboxProps } from "@/app/types";
-import { useAtomValue } from "jotai";
+import { PrimitiveAtom, useAtom, useAtomValue } from "jotai";
 import { totalBreakLeftAtom, totalBreakRightAtom } from "@/app/atom";
 
-export const PercentageRowbox = ({
-  leftNumber,
-  rightNumber,
-  boxTitle,
-  setLeftNumber,
-  setRightNumber,
-}: RowboxProps) => {
-  // atom の値を取得するにはuseAtomValueを使う必要がある。const totalBreakLeftValue = useAtomValue(totalBreakLeftAtom);が正しい。
+type Props = {
+  boxTitle: string;
+  left: PrimitiveAtom<number>;
+  right: PrimitiveAtom<number>;
+};
+
+export const PercentageRowbox = ({ boxTitle, left, right }: Props) => {
+  const [leftNumber, setLeftNumber] = useAtom(left);
+  const [rightNumber, setRightNumber] = useAtom(right);
   const totalBreakLeftValue = useAtomValue(totalBreakLeftAtom);
   const totalBreakRightValue = useAtomValue(totalBreakRightAtom);
 
