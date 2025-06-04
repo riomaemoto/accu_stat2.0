@@ -3,7 +3,7 @@
 import { atom } from "jotai";
 import { focusAtom } from "jotai-optics";
 
-type StatType = {
+export type StatType = {
   id: number;
   createdAt: string;
   updatedAt: string;

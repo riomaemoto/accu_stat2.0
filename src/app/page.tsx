@@ -1,127 +1,49 @@
-"use client";
-
-import { PercentageRowbox } from "@/components/percentageRowbox";
-import {
-  ballsMissedLeftAtom,
-  ballsMissedRightAtom,
-  ballsMissedWithSafetyLeftAtom,
-  ballsMissedWithSafetyRightAtom,
-  ballsPocketedLeftAtom,
-  ballsPocketedRightAtom,
-  gameScoreLeftAtom,
-  gameScoreRightAtom,
-  totalBreakLeftAtom,
-  totalBreakRightAtom,
-  unforcedErrorsLeftAtom,
-  unforcedErrorsRightAtom,
-  winningStreakLeftAtom,
-  winningStreakRightAtom,
-  kickingErrorsLeftAtom,
-  kickingErrorsRightAtom,
-  safetyErrorsLeftAtom,
-  safetyErrorsRightAtom,
-  dryBreaksLeftAtom,
-  dryBreaksRightAtom,
-  scratchesonBreakLeftAtom,
-  scratchesonBreakRightAtom,
-  ballsMadeonBreakLeftAtom,
-  ballsMadeonBreakRightAtom,
-  shotAfterTheBreakLeftAtom,
-  shotAfterTheBreakRightAtom,
-  breakAndRunLeftAtom,
-  breakAndRunRightAtom,
-  consecutiveBreakandRunsLeftAtom,
-  consecutiveBreakandRunsRightAtom,
-} from "./atom";
-import { AccuStats } from "@/components/accuStat";
-import { AccuStatWithMissSafety } from "@/components/accuStatWithMissSafety";
-import { Rowbox } from "@/components/rowbox";
-import { InGameStats } from "@/components/inGameStats";
-import { Toprow } from "@/components/toprow";
+import Link from "next/link";
 
 export default function Home() {
+  const listItems = [
+    {
+      player1: "Player A",
+      player2: "Player B",
+      createdDate: "2025-06-01",
+      updatedDate: "2025-06-05",
+      viewStatLink: "/stats/player-a-vs-player-b",
+    },
+    {
+      player1: "Player C",
+      player2: "Player D",
+      createdDate: "2025-05-20",
+      updatedDate: "2025-06-03",
+      viewStatLink: "/stats/player-c-vs-player-d",
+    },
+  ];
+
   return (
-    <div className="w-full flex flex-col items-center justify-center bg-gray-100">
-      <div className="w-full max-w-[1400px] flex flex-col items-center justify-center p-5">
-        <Toprow />
-        <Rowbox
-          boxTitle="Game Score"
-          left={gameScoreLeftAtom}
-          right={gameScoreRightAtom}
-        />
-        <Rowbox
-          boxTitle="Total Break"
-          left={totalBreakLeftAtom}
-          right={totalBreakRightAtom}
-        />
-        <PercentageRowbox
-          boxTitle="Dry Breaks"
-          left={dryBreaksLeftAtom}
-          right={dryBreaksRightAtom}
-        />
-        <PercentageRowbox
-          boxTitle="Scratches on Break"
-          left={scratchesonBreakLeftAtom}
-          right={scratchesonBreakRightAtom}
-        />
-        <PercentageRowbox
-          boxTitle="Ball Made on Break"
-          left={ballsMadeonBreakLeftAtom}
-          right={ballsMadeonBreakRightAtom}
-        />
-        <PercentageRowbox
-          left={shotAfterTheBreakLeftAtom}
-          right={shotAfterTheBreakRightAtom}
-          boxTitle="Shot After The Break"
-        />
-        <PercentageRowbox
-          left={breakAndRunLeftAtom}
-          right={breakAndRunRightAtom}
-          boxTitle="Break and Run"
-        />
-        <PercentageRowbox
-          left={consecutiveBreakandRunsLeftAtom}
-          right={consecutiveBreakandRunsRightAtom}
-          boxTitle="Consecutive Break and Runs"
-        />
-        <Rowbox
-          boxTitle="Longest Game Winning Streak"
-          left={winningStreakLeftAtom}
-          right={winningStreakRightAtom}
-        />
-        <InGameStats />
-        <Rowbox
-          boxTitle="Balls Pocketed"
-          left={ballsPocketedLeftAtom}
-          right={ballsPocketedRightAtom}
-        />
-        <Rowbox
-          boxTitle="Balls Missed"
-          left={ballsMissedLeftAtom}
-          right={ballsMissedRightAtom}
-        />
-        <Rowbox
-          boxTitle="Balls Missed with safety"
-          left={ballsMissedWithSafetyLeftAtom}
-          right={ballsMissedWithSafetyRightAtom}
-        />
-        <Rowbox
-          boxTitle="Unforced Errors"
-          left={unforcedErrorsLeftAtom}
-          right={unforcedErrorsRightAtom}
-        />
-        <Rowbox
-          boxTitle="Safety Errors"
-          left={safetyErrorsLeftAtom}
-          right={safetyErrorsRightAtom}
-        />
-        <Rowbox
-          boxTitle="Kicking Errors"
-          left={kickingErrorsLeftAtom}
-          right={kickingErrorsRightAtom}
-        />
-        <AccuStats />
-        <AccuStatWithMissSafety />
+    <div className="w-full min-h-screen bg-gray-100 flex flex-col items-center p-4">
+      <h1 className="text-2xl font-bold mb-6">Player Match List</h1>
+      <div className="w-full max-w-[800px] bg-white shadow-md rounded-lg overflow-hidden">
+        {listItems.map((item, index) => (
+          <div
+            key={index}
+            className="flex flex-col sm:flex-row items-center justify-between p-4 border-b last:border-b-0 hover:bg-gray-50"
+          >
+            <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4">
+              <p className="text-lg font-medium">{item.player1}</p>
+              <p className="text-lg font-medium">vs</p>
+              <p className="text-lg font-medium">{item.player2}</p>
+            </div>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 mt-2 sm:mt-0">
+              <p className="text-sm text-gray-500">Created: {item.createdDate}</p>
+              <p className="text-sm text-gray-500">Updated: {item.updatedDate}</p>
+            </div>
+            <Link
+              href={item.viewStatLink}
+              className="mt-2 sm:mt-0 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            >
+              View Stat
+            </Link>
+          </div>
+        ))}
       </div>
     </div>
   );
