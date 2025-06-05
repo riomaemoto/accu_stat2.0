@@ -34,6 +34,7 @@ export default function Home() {
   const handleClear = () => {
     aaa.push("/scoreSheet");
     setShowStats(initialStat);
+    setRead(initialStat);
   };
 
   return (

@@ -44,7 +44,6 @@ import { Toprow } from "@/components/toprow";
 import { useRouter } from "next/navigation";
 import { sendStats } from "../supabase";
 import { useAtom, useAtomValue } from "jotai";
-import { useState } from "react";
 
 export default function Home1() {
   const aaa = useRouter();
@@ -61,7 +60,7 @@ export default function Home1() {
             className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition"
             onClick={() => {
               console.log("readValue", readValue.totalBreak.left);
-              return;
+
               aaa.push("/");
             }}
           >
