@@ -1,15 +1,18 @@
 "use client";
-import { PrimitiveAtom, useAtom } from "jotai";
+import { toggleAtom } from "@/app/atom";
+import { PrimitiveAtom, useAtom, useAtomValue } from "jotai";
 
 type Props = {
   boxTitle: string;
   left: PrimitiveAtom<number>;
   right: PrimitiveAtom<number>;
+  readonlyScore: { left: number; right: number };
 };
 
-export const Rowbox = ({ boxTitle, left, right }: Props) => {
+export const Rowbox = ({ boxTitle, left, right, readonlyScore }: Props) => {
   const [leftNumber, setLeftNumber] = useAtom(left);
   const [rightNumber, setRightNumber] = useAtom(right);
+  const toggleValue = useAtomValue(toggleAtom);
 
   const incrementLeft = () => {
     if (setLeftNumber === undefined) return;
@@ -39,37 +42,41 @@ export const Rowbox = ({ boxTitle, left, right }: Props) => {
           <button
             className="border border-solid w-[50px] h-[40px] md:h-[40px] flex items-center justify-center bg-green-400 my-2"
             onClick={incrementLeft}
+            disabled={!toggleValue}
           >
             +
           </button>
           <button
             className="border border-solid w-[50px] h-[40px] md:h-[40px] flex items-center justify-center bg-red-300 my-2"
             onClick={decreaseLeft}
+            disabled={!toggleValue}
           >
             -
           </button>
         </div>
 
         <div className="border border-solid w-[100px] h-[90px] flex items-center justify-center">
-          {leftNumber}
+          {toggleValue ? leftNumber : readonlyScore.left}
         </div>
         <div className="border border-solid w-[250px] h-[90px] text-center flex items-center justify-center bg-sky-200 px-1">
           {boxTitle}
         </div>
 
         <div className="border border-solid w-[100px] h-[90px] flex items-center justify-center">
-          {rightNumber}
+          {toggleValue ? rightNumber : readonlyScore.right}
         </div>
         <div>
           <button
             className="border border-solid w-[50px] h-[40px] md:h-[40px] flex items-center justify-center bg-green-400 my-2"
             onClick={incrementRight}
+            disabled={!toggleValue}
           >
             +
           </button>
           <button
             className="border border-solid w-[50px] h-[40px] md:h-[40px] flex items-center justify-center bg-red-300 my-2"
             onClick={decreaseRight}
+            disabled={!toggleValue}
           >
             -
           </button>

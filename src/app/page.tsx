@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { getStats } from "./supabase";
 import { useSetAtom } from "jotai";
-import { initialStat, statAtom, StatType } from "./atom";
+import { initialStat, readonlyStatAtom, statAtom, StatType } from "./atom";
 
 export default function Home() {
   useEffect(() => {
@@ -24,7 +24,10 @@ export default function Home() {
     aaa.push("/scoreSheet");
     const fuck = data.find((item) => item.id === id);
     setShowStats(fuck!);
+    setRead(fuck!);
   };
+
+  const setRead = useSetAtom(readonlyStatAtom);
 
   const setShowStats = useSetAtom(statAtom);
 

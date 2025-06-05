@@ -1,19 +1,30 @@
 "use client";
 
 import { PrimitiveAtom, useAtom, useAtomValue } from "jotai";
-import { totalBreakLeftAtom, totalBreakRightAtom } from "@/app/atom";
+import {
+  toggleAtom,
+  totalBreakLeftAtom,
+  totalBreakRightAtom,
+} from "@/app/atom";
 
 type Props = {
   boxTitle: string;
   left: PrimitiveAtom<number>;
   right: PrimitiveAtom<number>;
+  readonlyScore: { left: number; right: number };
 };
 
-export const PercentageRowbox = ({ boxTitle, left, right }: Props) => {
+export const PercentageRowbox = ({
+  boxTitle,
+  left,
+  right,
+  readonlyScore,
+}: Props) => {
   const [leftNumber, setLeftNumber] = useAtom(left);
   const [rightNumber, setRightNumber] = useAtom(right);
   const totalBreakLeftValue = useAtomValue(totalBreakLeftAtom);
   const totalBreakRightValue = useAtomValue(totalBreakRightAtom);
+  const toggleValue = useAtomValue(toggleAtom);
 
   const percentageLeftValue = () => {
     const leftOutPut = Math.round((leftNumber / totalBreakLeftValue) * 100);
@@ -59,12 +70,14 @@ export const PercentageRowbox = ({ boxTitle, left, right }: Props) => {
           <button
             className="border border-solid w-[50px] h-[40px] md:h-[40px] flex items-center justify-center bg-green-400 my-2"
             onClick={incrementLeft}
+            disabled={!toggleValue}
           >
             +
           </button>
           <button
             className="border border-solid w-[50px] h-[40px] md:h-[40px] flex items-center justify-center bg-red-300 my-2"
             onClick={decrementLeft}
+            disabled={!toggleValue}
           >
             -
           </button>
@@ -72,7 +85,7 @@ export const PercentageRowbox = ({ boxTitle, left, right }: Props) => {
 
         <div>
           <div className="border border-solid w-[55px] md:w-[100px] h-[45px] flex items-center justify-center">
-            {leftNumber}
+            {toggleValue ? leftNumber : readonlyScore.left}
           </div>
           <div className="border border-solid w-[55px] md:w-[100px] h-[45px] flex items-center justify-center">
             {percentageLeftValue() + "%"}
@@ -84,7 +97,7 @@ export const PercentageRowbox = ({ boxTitle, left, right }: Props) => {
         </div>
         <div>
           <div className="border border-solid w-[55px] md:w-[100px] h-[45px] flex items-center justify-center">
-            {rightNumber}
+            {toggleValue ? rightNumber : readonlyScore.right}
           </div>
           <div className="border border-solid w-[55px] md:w-[100px] h-[45px] flex items-center justify-center">
             {percentageRightValue() + "%"}
@@ -95,12 +108,14 @@ export const PercentageRowbox = ({ boxTitle, left, right }: Props) => {
           <button
             className="border border-solid w-[50px] h-[40px] md:h-[40px] flex items-center justify-center bg-green-400 my-2"
             onClick={incrementRight}
+            disabled={!toggleValue}
           >
             +
           </button>
           <button
             className="border border-solid w-[50px] h-[40px] md:h-[40px] flex items-center justify-center bg-red-300 my-2"
             onClick={decrementRight}
+            disabled={!toggleValue}
           >
             -
           </button>
