@@ -13,3 +13,7 @@ export const getStats = async () => {
   const { data } = await supabase.from("stats_list").select("*");
   return data as StatType[];
 };
+
+export const updateStats = async (id: number, updateStats: StatType) => {
+  await supabase.from("stats_list").update(updateStats).eq("id", id);
+};

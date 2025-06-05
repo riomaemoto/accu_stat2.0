@@ -42,7 +42,7 @@ import { Rowbox } from "@/components/rowbox";
 import { InGameStats } from "@/components/inGameStats";
 import { Toprow } from "@/components/toprow";
 import { useRouter } from "next/navigation";
-import { sendStats } from "../supabase";
+import { sendStats, updateStats } from "../supabase";
 import { useAtom, useAtomValue } from "jotai";
 
 export default function Home1() {
@@ -68,7 +68,13 @@ export default function Home1() {
           </button>
           <button
             className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition"
-            onClick={() => sendStats(atomValue)}
+            onClick={() => {
+              if (atomValue.id) {
+                updateStats(atomValue.id, atomValue);
+              } else {
+                sendStats(atomValue);
+              }
+            }}
           >
             Save
           </button>
