@@ -3,10 +3,10 @@
 import { atom } from "jotai";
 import { focusAtom } from "jotai-optics";
 
-type StatType = {
-  id: number;
-  createdAt: string;
-  updatedAt: string;
+export type StatType = {
+  id?: number;
+  created_at?: string;
+  updated_at?: string;
   player1: string;
   player2: string;
   gameScore: { left: number; right: number };
@@ -26,10 +26,7 @@ type StatType = {
   breakAndRun: { left: number; right: number };
 };
 
-export const statAtom = atom<StatType>({
-  id: 0,
-  createdAt: "",
-  updatedAt: "",
+export const initialStat: StatType = {
   player1: "",
   player2: "",
   gameScore: { left: 0, right: 0 },
@@ -47,7 +44,16 @@ export const statAtom = atom<StatType>({
   shotAfterTheBreak: { left: 0, right: 0 },
   consecutiveBreakandRuns: { left: 0, right: 0 },
   breakAndRun: { left: 0, right: 0 },
-});
+};
+
+export const statAtom = atom<StatType>(initialStat);
+
+export const player1Atom = focusAtom(statAtom, (optic) =>
+  optic.prop("player1")
+);
+export const player2Atom = focusAtom(statAtom, (optic) =>
+  optic.prop("player2")
+);
 
 export const gameScoreLeftAtom = focusAtom(statAtom, (optic) =>
   optic.prop("gameScore").prop("left")
