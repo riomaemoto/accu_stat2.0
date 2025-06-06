@@ -32,6 +32,7 @@ import {
   breakAndRunRightAtom,
   consecutiveBreakandRunsLeftAtom,
   consecutiveBreakandRunsRightAtom,
+  statAtom,
 } from "@/app/atom";
 import { AccuStats } from "@/components/accuStat";
 import { AccuStatWithMissSafety } from "@/components/accuStatWithMissSafety";
@@ -40,6 +41,8 @@ import { InGameStats } from "@/components/inGameStats";
 import { Toprow } from "@/components/toprow";
 import { PercentageRowbox } from "@/components/percentageRowbox";
 import { useRouter } from "next/navigation";
+import { useAtom, useSetAtom } from "jotai";
+import { sendStatsData } from "../supabase";
 
 export default function ScoreSheet() {
   const [isEditing, setIsEditing] = useState(false);
@@ -49,8 +52,10 @@ export default function ScoreSheet() {
     router.push("/");
   };
 
-  const handleSave = () => {
-    alert("Changes saved!");
+  const [saveNewStat, setSaveNetStat] = useAtom(statAtom);
+
+  const handleSendSaveData = () => {
+    sendStatsData(saveNewStat);
   };
 
   return (
@@ -79,7 +84,7 @@ export default function ScoreSheet() {
               </label>
             </div>
             <button
-              onClick={handleSave}
+              onClick={handleSendSaveData}
               className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
             >
               Save
