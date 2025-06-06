@@ -46,11 +46,10 @@ export default function ScoreSheet() {
   const router = useRouter();
 
   const handleBack = () => {
-    router.push("/"); // Navigate to the home page
+    router.push("/");
   };
 
   const handleSave = () => {
-    // Add save functionality here
     alert("Changes saved!");
   };
 
@@ -88,7 +87,6 @@ export default function ScoreSheet() {
           </div>
         </div>
 
-        {/* Existing content */}
         <Toprow />
         <Rowbox
           boxTitle="Game Score"
