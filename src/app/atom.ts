@@ -4,9 +4,9 @@ import { atom } from "jotai";
 import { focusAtom } from "jotai-optics";
 
 export type StatType = {
-  id: number;
-  createdAt: string;
-  updatedAt: string;
+  id?: number;
+  created_at?: string;
+  updated_at?: string;
   player1: string;
   player2: string;
   gameScore: { left: number; right: number };
@@ -27,9 +27,6 @@ export type StatType = {
 };
 
 export const statAtom = atom<StatType>({
-  id: 0,
-  createdAt: "",
-  updatedAt: "",
   player1: "",
   player2: "",
   gameScore: { left: 0, right: 0 },
