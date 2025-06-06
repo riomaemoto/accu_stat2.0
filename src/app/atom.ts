@@ -46,6 +46,13 @@ export const statAtom = atom<StatType>({
   breakAndRun: { left: 0, right: 0 },
 });
 
+export const player1Atom = focusAtom(statAtom, (optic) =>
+  optic.prop("player1")
+);
+export const player2Atom = focusAtom(statAtom, (optic) =>
+  optic.prop("player2")
+);
+
 export const gameScoreLeftAtom = focusAtom(statAtom, (optic) =>
   optic.prop("gameScore").prop("left")
 );
