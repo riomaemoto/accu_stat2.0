@@ -28,8 +28,8 @@ export default function Home() {
       <h1 className="text-2xl font-bold text-center mb-4">History Records</h1>
       <div className="flex justify-center mb-4">
         <button
-          className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition"
-          onClick={() => router.push("/")}
+          className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition cursor-pointer"
+          onClick={() => router.push("scoreSheet")}
         >
           New Stat
         </button>
@@ -52,7 +52,7 @@ export default function Home() {
               </p>
             </div>
             <button
-              className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition"
+              className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition cursor-pointer"
               onClick={() => router.push(`/stats/${record.id}`)}
             >
               View Stat
