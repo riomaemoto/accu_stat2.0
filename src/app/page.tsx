@@ -1,43 +1,54 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { fetchStatsData } from "./supabase";
+import { initialStat, statAtom, StatType } from "./atom";
+import { useAtom } from "jotai";
 
 export default function Home() {
   const router = useRouter();
 
-  const history = [
-    {
-      id: 1,
-      player1: "John Doe",
-      player2: "Jane Smith",
-      createdAt: "2023-10-01",
-      updatedAt: "2023-10-02",
-    },
-    {
-      id: 2,
-      player1: "Alice Brown",
-      player2: "Bob White",
-      createdAt: "2023-10-03",
-      updatedAt: "2023-10-04",
-    },
-  ];
+  useEffect(() => {
+    getHistoryStat();
+  }, []);
 
+  const getHistoryStat = async () => {
+    const data = await fetchStatsData();
+    setHistoryStat(data);
+  };
+
+  const [historyStat, setHistoryStat] = useState<StatType[]>([]);
+
+  const handleViewStat = (id: number) => {
+    router.push("scoreSheet");
+    const statData = historyStat.find((record) => record.id === id);
+    if (statData) {
+      setStatAtomValue(statData);
+    }
+  };
+
+  const [statAtomValue, setStatAtomValue] = useAtom<StatType>(statAtom);
+
+  const handleNewStat = () => {
+    router.push("scoreSheet");
+    setStatAtomValue(initialStat);
+  };
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold text-center mb-4">History Records</h1>
       <div className="flex justify-center mb-4">
         <button
           className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition cursor-pointer"
-          onClick={() => router.push("scoreSheet")}
+          onClick={handleNewStat}
         >
           New Stat
         </button>
       </div>
       <ul className="space-y-4">
-        {history.map((record) => (
+        {historyStat.map((record, index) => (
           <li
-            key={record.id}
+            key={index}
             className="p-4 border rounded-lg shadow-md flex justify-between items-center bg-white hover:bg-gray-100 transition"
           >
             <div className="flex">
@@ -45,15 +56,15 @@ export default function Home() {
                 {record.player1} VS {record.player2}
               </p>
               <p className="text-sm text-gray-500 text-center ml-4 mt-1">
-                Created: {record.createdAt}
+                Created: {record.created_at}
               </p>
               <p className="text-sm text-gray-500 text-center ml-4 mt-1">
-                Updated: {record.updatedAt}
+                Updated: {record.updated_at}
               </p>
             </div>
             <button
               className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition cursor-pointer"
-              onClick={() => router.push("scoreSheet")}
+              onClick={() => handleViewStat(record.id!)}
             >
               View Stat
             </button>

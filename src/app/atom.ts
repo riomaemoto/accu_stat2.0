@@ -26,7 +26,7 @@ export type StatType = {
   breakAndRun: { left: number; right: number };
 };
 
-export const statAtom = atom<StatType>({
+export const initialStat: StatType = {
   player1: "",
   player2: "",
   gameScore: { left: 0, right: 0 },
@@ -44,7 +44,9 @@ export const statAtom = atom<StatType>({
   shotAfterTheBreak: { left: 0, right: 0 },
   consecutiveBreakandRuns: { left: 0, right: 0 },
   breakAndRun: { left: 0, right: 0 },
-});
+};
+
+export const statAtom = atom<StatType>(initialStat);
 
 export const player1Atom = focusAtom(statAtom, (optic) =>
   optic.prop("player1")
