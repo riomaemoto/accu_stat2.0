@@ -7,9 +7,10 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 export const fetchStatsData = async () => {
   const { data } = await supabase.from("stats_list").select("*");
+
   return data as StatType[];
 };
 
-export const sendStatsData = async (data: StatType) => {
-  await supabase.from("stats_list").insert(data);
+export const sendStatsData = async (stats_list: string) => {
+  await supabase.from("stat_list").insert([{ stats_list }]);
 };

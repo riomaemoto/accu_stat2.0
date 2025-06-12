@@ -54,8 +54,9 @@ export default function ScoreSheet() {
 
   const [saveNewStat, setSaveNetStat] = useAtom(statAtom);
 
-  const handleSendSaveData = () => {
-    sendStatsData(saveNewStat);
+  const handleSave = () => {
+    sendStatsData("stats_list");
+    setSaveNetStat(saveNewStat);
   };
 
   return (

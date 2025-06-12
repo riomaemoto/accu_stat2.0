@@ -1,39 +1,20 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { fetchStatsData } from "./supabase";
-import { initialStat, statAtom, StatType } from "./atom";
-import { useAtom } from "jotai";
+import { statAtom, StatType } from "./atom";
 
 export default function Home() {
   const router = useRouter();
 
-  useEffect(() => {
-    getHistoryStat();
-  }, []);
-
   const getHistoryStat = async () => {
-    const data = await fetchStatsData();
-    setHistoryStat(data);
+    const { aaa } = await fetchStatsData();
+    setHistoryStat(aaa);
   };
 
   const [historyStat, setHistoryStat] = useState<StatType[]>([]);
 
-  const handleViewStat = (id: number) => {
-    router.push("scoreSheet");
-    const statData = historyStat.find((record) => record.id === id);
-    if (statData) {
-      setStatAtomValue(statData);
-    }
-  };
-
-  const [statAtomValue, setStatAtomValue] = useAtom<StatType>(statAtom);
-
-  const handleNewStat = () => {
-    router.push("scoreSheet");
-    setStatAtomValue(initialStat);
-  };
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold text-center mb-4">History Records</h1>
