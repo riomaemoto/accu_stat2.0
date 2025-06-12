@@ -41,7 +41,7 @@ import { InGameStats } from "@/components/inGameStats";
 import { Toprow } from "@/components/toprow";
 import { PercentageRowbox } from "@/components/percentageRowbox";
 import { useRouter } from "next/navigation";
-import { useAtom, useSetAtom } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { sendStatsData } from "../supabase";
 
 export default function ScoreSheet() {
@@ -52,11 +52,12 @@ export default function ScoreSheet() {
     router.push("/");
   };
 
-  const [saveNewStat, setSaveNetStat] = useAtom(statAtom);
+  const saveNewStat = useAtomValue(statAtom);
 
   const handleSave = () => {
-    sendStatsData("stats_list");
-    setSaveNetStat(saveNewStat);
+    sendStatsData(saveNewStat);
+
+    console.log(saveNewStat);
   };
 
   return (
