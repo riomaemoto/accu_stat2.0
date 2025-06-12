@@ -1,18 +1,28 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { fetchStatsData } from "./supabase";
-import { statAtom, StatType } from "./atom";
+import { StatType } from "./atom";
 
 export default function Home() {
   const router = useRouter();
 
+  useEffect(() => {
+    getHistoryStat();
+  });
+
   const getHistoryStat = async () => {
-    const { aaa } = await fetchStatsData();
+    const aaa = await fetchStatsData();
     setHistoryStat(aaa);
   };
 
+  const handleNewStat = () => {
+    router.push("/scoreSheet");
+  };
+  const handleViewStat = (id: number) => {
+    router.push("/scoreSheet");
+  };
   const [historyStat, setHistoryStat] = useState<StatType[]>([]);
 
   return (
