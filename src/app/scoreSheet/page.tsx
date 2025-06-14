@@ -33,6 +33,7 @@ import {
   consecutiveBreakandRunsLeftAtom,
   consecutiveBreakandRunsRightAtom,
   statAtom,
+  toggleAtom,
 } from "@/app/atom";
 import { AccuStats } from "@/components/accuStat";
 import { AccuStatWithMissSafety } from "@/components/accuStatWithMissSafety";
@@ -45,7 +46,7 @@ import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { sendStatsData } from "../supabase";
 
 export default function ScoreSheet() {
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useAtom(toggleAtom);
   const router = useRouter();
 
   const handleBack = () => {
@@ -74,16 +75,16 @@ export default function ScoreSheet() {
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-4">
             <div className="flex items-center">
-              <span className="mr-2 text-gray-700">Edit</span>
-              <label className="relative inline-flex items-center cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={isEditing}
-                  onChange={() => setIsEditing(!isEditing)}
-                  className="sr-only peer"
-                />
-                <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:bg-blue-600 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full peer-checked:after:border-white"></div>
-              </label>
+              <button
+                onClick={() => setIsEditing(!isEditing)}
+                className={`px-4 py-2 rounded ${
+                  isEditing
+                    ? "bg-blue-600 text-white"
+                    : "bg-gray-200 text-gray-700"
+                } hover:bg-blue-500`}
+              >
+                {isEditing ? "Editing" : "ViewOnly"}
+              </button>
             </div>
             <button
               onClick={() => handleSave()}

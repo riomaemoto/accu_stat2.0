@@ -1,5 +1,6 @@
 "use client";
-import { PrimitiveAtom, useAtom } from "jotai";
+import { toggleAtom } from "@/app/atom";
+import { PrimitiveAtom, useAtom, useAtomValue } from "jotai";
 
 type Props = {
   boxTitle: string;
@@ -10,6 +11,7 @@ type Props = {
 export const Rowbox = ({ boxTitle, left, right }: Props) => {
   const [leftNumber, setLeftNumber] = useAtom(left);
   const [rightNumber, setRightNumber] = useAtom(right);
+  const isEditing = useAtomValue(toggleAtom);
 
   const incrementLeft = () => {
     if (setLeftNumber === undefined) return;
@@ -39,12 +41,14 @@ export const Rowbox = ({ boxTitle, left, right }: Props) => {
           <button
             className="border border-solid w-[50px] h-[40px] md:h-[40px] flex items-center justify-center bg-green-400 my-2"
             onClick={incrementLeft}
+            disabled={!isEditing}
           >
             +
           </button>
           <button
             className="border border-solid w-[50px] h-[40px] md:h-[40px] flex items-center justify-center bg-red-300 my-2"
             onClick={decreaseLeft}
+            disabled={!isEditing}
           >
             -
           </button>
@@ -64,12 +68,14 @@ export const Rowbox = ({ boxTitle, left, right }: Props) => {
           <button
             className="border border-solid w-[50px] h-[40px] md:h-[40px] flex items-center justify-center bg-green-400 my-2"
             onClick={incrementRight}
+            disabled={!isEditing}
           >
             +
           </button>
           <button
             className="border border-solid w-[50px] h-[40px] md:h-[40px] flex items-center justify-center bg-red-300 my-2"
             onClick={decreaseRight}
+            disabled={!isEditing}
           >
             -
           </button>
