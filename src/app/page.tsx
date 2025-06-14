@@ -10,10 +10,11 @@ export default function Home() {
 
   useEffect(() => {
     getHistoryStat();
-  });
+  }, []);
 
   const getHistoryStat = async () => {
     const aaa = await fetchStatsData();
+
     setHistoryStat(aaa);
   };
 
