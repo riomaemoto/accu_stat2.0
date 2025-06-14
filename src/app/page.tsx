@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { fetchStatsData } from "./supabase";
-import { statAtom, StatType } from "./atom";
+import { initialStat, statAtom, StatType } from "./atom";
 import { useSetAtom } from "jotai";
 
 export default function Home() {
@@ -21,6 +21,9 @@ export default function Home() {
 
   const handleNewStat = () => {
     router.push("/scoreSheet");
+    setShowStat(initialStat);
+    // 新しいStatを作成するために、初期値をセット
+    // ここで`initialStat`を使う理由は、Statの初期状態を定義しているから。
   };
   const handleViewStat = (id: number) => {
     router.push("/scoreSheet");
