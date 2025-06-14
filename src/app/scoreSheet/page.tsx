@@ -43,7 +43,7 @@ import { Toprow } from "@/components/toprow";
 import { PercentageRowbox } from "@/components/percentageRowbox";
 import { useRouter } from "next/navigation";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { sendStatsData } from "../supabase";
+import { sendStatsData, upDateStats } from "../supabase";
 
 export default function ScoreSheet() {
   const [isEditing, setIsEditing] = useAtom(toggleAtom);
@@ -53,12 +53,14 @@ export default function ScoreSheet() {
     router.push("/");
   };
 
-  const saveNewStat = useAtomValue(statAtom);
+  const statAtomValue = useAtomValue(statAtom);
 
   const handleSave = () => {
-    sendStatsData(saveNewStat);
-
-    console.log(saveNewStat);
+    if (statAtomValue.id) {
+      upDateStats(statAtomValue.id, statAtomValue);
+    } else {
+      sendStatsData(statAtomValue);
+    }
   };
 
   return (
@@ -87,8 +89,8 @@ export default function ScoreSheet() {
               </button>
             </div>
             <button
-              onClick={() => handleSave()}
               className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+              onClick={handleSave}
             >
               Save
             </button>

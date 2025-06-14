@@ -46,6 +46,8 @@ export const initialStat: StatType = {
   breakAndRun: { left: 0, right: 0 },
 };
 
+const readOnlyAtom = atom<StatType>(initialStat);
+
 export const toggleAtom = atom<boolean>(false);
 
 export const statAtom = atom<StatType>(initialStat);
