@@ -6,9 +6,10 @@ type Props = {
   boxTitle: string;
   left: PrimitiveAtom<number>;
   right: PrimitiveAtom<number>;
+  readonly: { left: number; right: number };
 };
 
-export const Rowbox = ({ boxTitle, left, right }: Props) => {
+export const Rowbox = ({ boxTitle, left, right, readonly }: Props) => {
   const [leftNumber, setLeftNumber] = useAtom(left);
   const [rightNumber, setRightNumber] = useAtom(right);
   const isEditing = useAtomValue(toggleAtom);
@@ -55,14 +56,14 @@ export const Rowbox = ({ boxTitle, left, right }: Props) => {
         </div>
 
         <div className="border border-solid w-[100px] h-[90px] flex items-center justify-center">
-          {leftNumber}
+          {isEditing ? leftNumber : readonly.left}
         </div>
         <div className="border border-solid w-[250px] h-[90px] text-center flex items-center justify-center bg-sky-200 px-1">
           {boxTitle}
         </div>
 
         <div className="border border-solid w-[100px] h-[90px] flex items-center justify-center">
-          {rightNumber}
+          {isEditing ? rightNumber : readonly.right}
         </div>
         <div>
           <button

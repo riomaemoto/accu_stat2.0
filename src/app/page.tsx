@@ -3,8 +3,9 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { fetchStatsData } from "./supabase";
-import { initialStat, statAtom, StatType } from "./atom";
+import { initialStat, readOnlyAtom, statAtom, StatType } from "./atom";
 import { useSetAtom } from "jotai";
+import { read } from "fs";
 
 export default function Home() {
   const router = useRouter();
@@ -22,17 +23,17 @@ export default function Home() {
   const handleNewStat = () => {
     router.push("/scoreSheet");
     setShowStat(initialStat);
-    // 新しいStatを作成するために、初期値をセット
-    // ここで`initialStat`を使う理由は、Statの初期状態を定義しているから。
+    setReadonly(initialStat);
   };
   const handleViewStat = (id: number) => {
     router.push("/scoreSheet");
     const stat = historyStat.find((record) => record.id === id);
     setShowStat(stat!);
-    // ↑のビックリマーク!を入れる理由は、入れないとエラーになる。何故エラーになるのか？それは、TypeScriptが`stat`が`undefined`になる可能性を考慮しているからです。でも、ここでは`stat`が必ず存在すると確信している.何故なら、handleViewStatのボタンを押せている時点で、データがあるから。データがなければそもそもこのボタンが押せないので`!`「この値は絶対に存在するから、`undefined`ではない」と伝えている。
+    setReadonly(stat!);
   };
 
   const setShowStat = useSetAtom(statAtom);
+  const setReadonly = useSetAtom(readOnlyAtom);
 
   const [historyStat, setHistoryStat] = useState<StatType[]>([]);
 

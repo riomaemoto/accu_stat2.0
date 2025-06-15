@@ -11,9 +11,15 @@ type Props = {
   boxTitle: string;
   left: PrimitiveAtom<number>;
   right: PrimitiveAtom<number>;
+  readonly: { left: number; right: number };
 };
 
-export const PercentageRowbox = ({ boxTitle, left, right }: Props) => {
+export const PercentageRowbox = ({
+  boxTitle,
+  left,
+  right,
+  readonly,
+}: Props) => {
   const [leftNumber, setLeftNumber] = useAtom(left);
   const [rightNumber, setRightNumber] = useAtom(right);
   const totalBreakLeftValue = useAtomValue(totalBreakLeftAtom);
@@ -79,7 +85,7 @@ export const PercentageRowbox = ({ boxTitle, left, right }: Props) => {
 
         <div>
           <div className="border border-solid w-[55px] md:w-[100px] h-[45px] flex items-center justify-center">
-            {leftNumber}
+            {isEditing ? leftNumber : readonly.left}
           </div>
           <div className="border border-solid w-[55px] md:w-[100px] h-[45px] flex items-center justify-center">
             {percentageLeftValue() + "%"}
@@ -91,7 +97,7 @@ export const PercentageRowbox = ({ boxTitle, left, right }: Props) => {
         </div>
         <div>
           <div className="border border-solid w-[55px] md:w-[100px] h-[45px] flex items-center justify-center">
-            {rightNumber}
+            {isEditing ? rightNumber : readonly.right}
           </div>
           <div className="border border-solid w-[55px] md:w-[100px] h-[45px] flex items-center justify-center">
             {percentageRightValue() + "%"}
