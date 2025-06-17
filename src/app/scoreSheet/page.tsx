@@ -42,7 +42,7 @@ import { Toprow } from "@/components/toprow";
 import { PercentageRowbox } from "@/components/percentageRowbox";
 import { useRouter } from "next/navigation";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { sendStatsData } from "../supabase";
+import { sendStatsData, upDateStatsData } from "../supabase";
 
 export default function ScoreSheet() {
   const [isEditing, setIsEditing] = useState(false);
@@ -55,9 +55,14 @@ export default function ScoreSheet() {
   const saveNewStat = useAtomValue(statAtom);
 
   const handleSave = () => {
-    sendStatsData(saveNewStat);
-
-    console.log(saveNewStat);
+    if (saveNewStat.id) {
+      // if (saveNewStat.id) はもし、idが存在する場合、という意味。データがあるので、IDがあるため。
+      // idがある場合、下のように既存のデータを更新する
+      upDateStatsData(saveNewStat);
+    } else {
+      sendStatsData(saveNewStat);
+      // 無ければ新しいデータを送信する
+    }
   };
 
   return (
@@ -86,7 +91,7 @@ export default function ScoreSheet() {
               </label>
             </div>
             <button
-              onClick={() => handleSave()}
+              onClick={handleSave}
               className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
             >
               Save

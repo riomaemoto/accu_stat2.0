@@ -14,3 +14,7 @@ export const fetchStatsData = async () => {
 export const sendStatsData = async (statsData: StatType) => {
   await supabase.from("statsData").insert(statsData);
 };
+
+export const upDateStatsData = async (statsData: StatType) => {
+  await supabase.from("statsData").update(statsData).eq("id", statsData.id);
+};
