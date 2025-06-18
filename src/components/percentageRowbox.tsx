@@ -14,12 +14,7 @@ type Props = {
   readOnly: { left: number; right: number };
 };
 
-export const PercentageRowbox = ({
-  boxTitle,
-  left,
-  right,
-  readOnly,
-}: Props) => {
+export const PercentageRowbox = ({ boxTitle, left, right }: Props) => {
   const [leftNumber, setLeftNumber] = useAtom(left);
   const [rightNumber, setRightNumber] = useAtom(right);
   const totalBreakLeftValue = useAtomValue(totalBreakLeftAtom);
@@ -104,16 +99,22 @@ export const PercentageRowbox = ({
         <div className="relative w-[140px] md:w-[250px] h-[90px] bg-gradient-to-br from-green-700 via-green-600 to-green-800 rounded-lg border-4 border-amber-600 shadow-lg">
           {/* Pool table felt texture */}
           <div className="absolute inset-2 bg-gradient-to-br from-green-500 to-green-700 rounded opacity-40"></div>
-          
+
           {/* Corner pocket decorations */}
           <div className="absolute -top-1 -left-1 w-3 h-3 bg-black rounded-full border border-amber-700"></div>
           <div className="absolute -top-1 -right-1 w-3 h-3 bg-black rounded-full border border-amber-700"></div>
           <div className="absolute -bottom-1 -left-1 w-3 h-3 bg-black rounded-full border border-amber-700"></div>
           <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-black rounded-full border border-amber-700"></div>
-          
+
           {/* Center title */}
           <div className="absolute inset-0 flex items-center justify-center px-2">
-            <span className="text-yellow-300 font-bold text-lg text-center drop-shadow-lg" style={{ textShadow: '2px 2px 0px black, -2px -2px 0px black, 2px -2px 0px black, -2px 2px 0px black' }}>
+            <span
+              className="text-yellow-300 font-bold text-lg text-center drop-shadow-lg"
+              style={{
+                textShadow:
+                  "2px 2px 0px black, -2px -2px 0px black, 2px -2px 0px black, -2px 2px 0px black",
+              }}
+            >
               {boxTitle}
             </span>
           </div>
