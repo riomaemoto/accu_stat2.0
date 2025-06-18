@@ -50,7 +50,7 @@ export default function ScoreSheet() {
   const [isEditing, setIsEditing] = useAtom(toggleAtom);
   const router = useRouter();
 
-  const isViewingExistingStat = !!saveNewStat.id;
+  const isViewingExistingStat = saveNewStat.id;
 
   React.useEffect(() => {
     if (isViewingExistingStat) {
