@@ -48,6 +48,8 @@ export const initialStat: StatType = {
 
 export const readOnlyStatAtom = atom<StatType>(initialStat);
 
+export const toggleAtom = atom<boolean>(false);
+
 export const statAtom = atom<StatType>(initialStat);
 
 export const player1Atom = focusAtom(statAtom, (optic) =>
@@ -147,5 +149,3 @@ export const breakAndRunLeftAtom = focusAtom(statAtom, (optic) =>
 export const breakAndRunRightAtom = focusAtom(statAtom, (optic) =>
   optic.prop("breakAndRun").prop("right")
 );
-
-export const toggleAtom = atom<boolean>(false);

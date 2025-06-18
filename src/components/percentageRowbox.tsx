@@ -1,15 +1,25 @@
 "use client";
 
 import { PrimitiveAtom, useAtom, useAtomValue } from "jotai";
-import { totalBreakLeftAtom, totalBreakRightAtom, toggleAtom } from "@/app/atom";
+import {
+  totalBreakLeftAtom,
+  totalBreakRightAtom,
+  toggleAtom,
+} from "@/app/atom";
 
 type Props = {
   boxTitle: string;
   left: PrimitiveAtom<number>;
   right: PrimitiveAtom<number>;
+  readOnly: { left: number; right: number };
 };
 
-export const PercentageRowbox = ({ boxTitle, left, right }: Props) => {
+export const PercentageRowbox = ({
+  boxTitle,
+  left,
+  right,
+  readOnly,
+}: Props) => {
   const [leftNumber, setLeftNumber] = useAtom(left);
   const [rightNumber, setRightNumber] = useAtom(right);
   const totalBreakLeftValue = useAtomValue(totalBreakLeftAtom);
@@ -59,7 +69,9 @@ export const PercentageRowbox = ({ boxTitle, left, right }: Props) => {
         <div>
           <button
             className={`border border-solid w-[50px] h-[40px] md:h-[40px] flex items-center justify-center my-2 ${
-              isEditing ? "bg-green-400 hover:bg-green-500" : "bg-gray-300 cursor-not-allowed"
+              isEditing
+                ? "bg-green-400 hover:bg-green-500"
+                : "bg-gray-300 cursor-not-allowed"
             }`}
             onClick={incrementLeft}
             disabled={!isEditing}
@@ -68,7 +80,9 @@ export const PercentageRowbox = ({ boxTitle, left, right }: Props) => {
           </button>
           <button
             className={`border border-solid w-[50px] h-[40px] md:h-[40px] flex items-center justify-center my-2 ${
-              isEditing ? "bg-red-300 hover:bg-red-400" : "bg-gray-300 cursor-not-allowed"
+              isEditing
+                ? "bg-red-300 hover:bg-red-400"
+                : "bg-gray-300 cursor-not-allowed"
             }`}
             onClick={decrementLeft}
             disabled={!isEditing}
@@ -101,7 +115,9 @@ export const PercentageRowbox = ({ boxTitle, left, right }: Props) => {
         <div>
           <button
             className={`border border-solid w-[50px] h-[40px] md:h-[40px] flex items-center justify-center my-2 ${
-              isEditing ? "bg-green-400 hover:bg-green-500" : "bg-gray-300 cursor-not-allowed"
+              isEditing
+                ? "bg-green-400 hover:bg-green-500"
+                : "bg-gray-300 cursor-not-allowed"
             }`}
             onClick={incrementRight}
             disabled={!isEditing}
@@ -110,7 +126,9 @@ export const PercentageRowbox = ({ boxTitle, left, right }: Props) => {
           </button>
           <button
             className={`border border-solid w-[50px] h-[40px] md:h-[40px] flex items-center justify-center my-2 ${
-              isEditing ? "bg-red-300 hover:bg-red-400" : "bg-gray-300 cursor-not-allowed"
+              isEditing
+                ? "bg-red-300 hover:bg-red-400"
+                : "bg-gray-300 cursor-not-allowed"
             }`}
             onClick={decrementRight}
             disabled={!isEditing}

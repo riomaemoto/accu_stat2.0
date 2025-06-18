@@ -1,14 +1,15 @@
 "use client";
 import { PrimitiveAtom, useAtom, useAtomValue } from "jotai";
-import { toggleAtom } from "@/app/atom";
+import { readOnlyStatAtom, toggleAtom } from "@/app/atom";
 
 type Props = {
   boxTitle: string;
   left: PrimitiveAtom<number>;
   right: PrimitiveAtom<number>;
+  readOnly: { left: number; right: number };
 };
 
-export const Rowbox = ({ boxTitle, left, right }: Props) => {
+export const Rowbox = ({ boxTitle, left, right, readOnly }: Props) => {
   const [leftNumber, setLeftNumber] = useAtom(left);
   const [rightNumber, setRightNumber] = useAtom(right);
   const isEditing = useAtomValue(toggleAtom);
@@ -63,14 +64,14 @@ export const Rowbox = ({ boxTitle, left, right }: Props) => {
         </div>
 
         <div className="border border-solid w-[100px] h-[90px] flex items-center justify-center">
-          {leftNumber}
+          {isEditing ? leftNumber : readOnly.left}
         </div>
         <div className="border border-solid w-[250px] h-[90px] text-center flex items-center justify-center bg-sky-200 px-1">
           {boxTitle}
         </div>
 
         <div className="border border-solid w-[100px] h-[90px] flex items-center justify-center">
-          {rightNumber}
+          {isEditing ? rightNumber : readOnly.right}
         </div>
         <div>
           <button

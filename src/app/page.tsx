@@ -3,8 +3,9 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { fetchStatsData } from "./supabase";
-import { initialStat, statAtom, StatType } from "./atom";
+import { initialStat, readOnlyStatAtom, statAtom, StatType } from "./atom";
 import { useSetAtom } from "jotai";
+import { read } from "fs";
 
 export default function Home() {
   const router = useRouter();
@@ -15,21 +16,24 @@ export default function Home() {
 
   const getHistoryStat = async () => {
     const aaa = await fetchStatsData();
-
     setHistoryStat(aaa);
   };
 
   const handleNewStat = () => {
     router.push("/scoreSheet");
     setShowStat(initialStat);
+    setReadOnlyStat(initialStat);
   };
+
   const handleViewStat = (id: number) => {
     router.push("/scoreSheet");
     const stat = historyStat.find((record) => record.id === id);
     setShowStat(stat!);
+    setReadOnlyStat(stat!);
   };
 
   const setShowStat = useSetAtom(statAtom);
+  const setReadOnlyStat = useSetAtom(readOnlyStatAtom);
 
   const [historyStat, setHistoryStat] = useState<StatType[]>([]);
 

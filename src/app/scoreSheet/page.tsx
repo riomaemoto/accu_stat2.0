@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import {
   ballsMissedLeftAtom,
   ballsMissedRightAtom,
@@ -34,6 +34,7 @@ import {
   consecutiveBreakandRunsRightAtom,
   statAtom,
   toggleAtom,
+  readOnlyStatAtom,
 } from "@/app/atom";
 import { AccuStats } from "@/components/accuStat";
 import { AccuStatWithMissSafety } from "@/components/accuStatWithMissSafety";
@@ -49,10 +50,11 @@ export default function ScoreSheet() {
   const saveNewStat = useAtomValue(statAtom);
   const [isEditing, setIsEditing] = useAtom(toggleAtom);
   const router = useRouter();
+  const readOnlyValue = useAtomValue(readOnlyStatAtom);
 
   const isViewingExistingStat = saveNewStat.id;
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isViewingExistingStat) {
       setIsEditing(false);
     } else {
@@ -105,77 +107,92 @@ export default function ScoreSheet() {
           boxTitle="Game Score"
           left={gameScoreLeftAtom}
           right={gameScoreRightAtom}
+          readOnly={readOnlyValue.gameScore}
         />
         <Rowbox
           boxTitle="Total Break"
           left={totalBreakLeftAtom}
           right={totalBreakRightAtom}
+          readOnly={readOnlyValue.totalBreak}
         />
         <PercentageRowbox
           boxTitle="Dry Breaks"
           left={dryBreaksLeftAtom}
           right={dryBreaksRightAtom}
+          readOnly={readOnlyValue.dryBreaks}
         />
         <PercentageRowbox
           boxTitle="Scratches on Break"
           left={scratchesonBreakLeftAtom}
           right={scratchesonBreakRightAtom}
+          readOnly={readOnlyValue.scratchesonBreak}
         />
         <PercentageRowbox
           boxTitle="Ball Made on Break"
           left={ballsMadeonBreakLeftAtom}
           right={ballsMadeonBreakRightAtom}
+          readOnly={readOnlyValue.ballsMadeonBreak}
         />
         <PercentageRowbox
+          boxTitle="Shot After The Break"
           left={shotAfterTheBreakLeftAtom}
           right={shotAfterTheBreakRightAtom}
-          boxTitle="Shot After The Break"
+          readOnly={readOnlyValue.shotAfterTheBreak}
         />
         <PercentageRowbox
+          boxTitle="Break and Run"
           left={breakAndRunLeftAtom}
           right={breakAndRunRightAtom}
-          boxTitle="Break and Run"
+          readOnly={readOnlyValue.breakAndRun}
         />
         <PercentageRowbox
+          boxTitle="Consecutive Break and Runs"
           left={consecutiveBreakandRunsLeftAtom}
           right={consecutiveBreakandRunsRightAtom}
-          boxTitle="Consecutive Break and Runs"
+          readOnly={readOnlyValue.consecutiveBreakandRuns}
         />
         <Rowbox
           boxTitle="Longest Game Winning Streak"
           left={winningStreakLeftAtom}
           right={winningStreakRightAtom}
+          readOnly={readOnlyValue.winningStreak}
         />
         <InGameStats />
         <Rowbox
           boxTitle="Balls Pocketed"
           left={ballsPocketedLeftAtom}
           right={ballsPocketedRightAtom}
+          readOnly={readOnlyValue.ballsPocketed}
         />
         <Rowbox
           boxTitle="Balls Missed"
           left={ballsMissedLeftAtom}
           right={ballsMissedRightAtom}
+          readOnly={readOnlyValue.ballsMissed}
         />
         <Rowbox
           boxTitle="Balls Missed with safety"
           left={ballsMissedWithSafetyLeftAtom}
           right={ballsMissedWithSafetyRightAtom}
+          readOnly={readOnlyValue.ballsMissedWithSafety}
         />
         <Rowbox
           boxTitle="Unforced Errors"
           left={unforcedErrorsLeftAtom}
           right={unforcedErrorsRightAtom}
+          readOnly={readOnlyValue.unforcedErrors}
         />
         <Rowbox
           boxTitle="Safety Errors"
           left={safetyErrorsLeftAtom}
           right={safetyErrorsRightAtom}
+          readOnly={readOnlyValue.safetyErrors}
         />
         <Rowbox
           boxTitle="Kicking Errors"
           left={kickingErrorsLeftAtom}
           right={kickingErrorsRightAtom}
+          readOnly={readOnlyValue.kickingErrors}
         />
         <AccuStats />
         <AccuStatWithMissSafety />
