@@ -86,48 +86,77 @@ export default function ScoreSheet() {
             <span className="relative">← Back</span>
           </button>
         </div>
-        
+
         <div className="flex items-center justify-center mb-8">
           <div className="bg-gradient-to-r from-gray-800/90 to-gray-700/90 backdrop-blur-sm border border-gray-600/50 rounded-2xl p-6 shadow-2xl">
             <div className="flex items-center space-x-6">
               <div className="flex items-center space-x-2">
                 <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
-                <span className="text-gray-300 text-sm font-medium">Status:</span>
+                <span className="text-gray-300 text-sm font-medium">
+                  Status:
+                </span>
               </div>
-              
+
               <button
                 className={`group relative px-6 py-3 font-semibold rounded-xl transition-all duration-300 border ${
-                  isEditing 
-                    ? 'bg-gradient-to-r from-emerald-600 to-emerald-700 text-white border-emerald-500 hover:shadow-emerald-500/25' 
-                    : 'bg-gradient-to-r from-gray-600 to-gray-700 text-white border-gray-500 hover:shadow-gray-500/25'
+                  isEditing
+                    ? "bg-gradient-to-r from-emerald-600 to-emerald-700 text-white border-emerald-500 hover:shadow-emerald-500/25"
+                    : "bg-gradient-to-r from-gray-600 to-gray-700 text-white border-gray-500 hover:shadow-gray-500/25"
                 } hover:scale-105`}
                 onClick={() => setIsEditing(!isEditing)}
               >
-                <span className={`absolute inset-0 rounded-xl blur opacity-75 group-hover:opacity-100 transition duration-300 ${
-                  isEditing 
-                    ? 'bg-gradient-to-r from-emerald-500 to-emerald-600' 
-                    : 'bg-gradient-to-r from-gray-500 to-gray-600'
-                }`}></span>
+                <span
+                  className={`absolute inset-0 rounded-xl blur opacity-75 group-hover:opacity-100 transition duration-300 ${
+                    isEditing
+                      ? "bg-gradient-to-r from-emerald-500 to-emerald-600"
+                      : "bg-gradient-to-r from-gray-500 to-gray-600"
+                  }`}
+                ></span>
                 <span className="relative flex items-center space-x-2">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
                     {isEditing ? (
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                      />
                     ) : (
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                      />
                     )}
                   </svg>
                   <span>{isEditing ? "Editing Mode" : "Read Only"}</span>
                 </span>
               </button>
-              
+
               <button
                 onClick={handleSave}
                 className="group relative px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-blue-500/25 hover:scale-105 transition-all duration-300 border border-blue-500"
               >
                 <span className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl blur opacity-75 group-hover:opacity-100 transition duration-300"></span>
                 <span className="relative flex items-center space-x-2">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"
+                    />
                   </svg>
                   <span>Save Game</span>
                 </span>
@@ -138,7 +167,7 @@ export default function ScoreSheet() {
 
         <div className="p-8">
           <Toprow />
-          
+
           <div className="space-y-4 mt-6">
             <Rowbox
               boxTitle="Game Score"
