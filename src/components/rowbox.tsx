@@ -63,14 +63,30 @@ export const Rowbox = ({ boxTitle, left, right, readOnly }: Props) => {
           </button>
         </div>
 
-        <div className="border border-solid w-[100px] h-[90px] flex items-center justify-center">
+        <div className="border border-white/20 w-[100px] h-[90px] flex items-center justify-center bg-white/10 backdrop-blur-md text-white font-semibold">
           {isEditing ? leftNumber : readOnly.left}
         </div>
-        <div className="border border-solid w-[250px] h-[90px] text-center flex items-center justify-center bg-sky-200 px-1">
-          {boxTitle}
+        
+        {/* Pool Table Design for Title */}
+        <div className="relative w-[250px] h-[90px] bg-gradient-to-br from-green-700 via-green-600 to-green-800 rounded-lg border-4 border-amber-600 shadow-lg">
+          {/* Pool table felt texture */}
+          <div className="absolute inset-2 bg-gradient-to-br from-green-500 to-green-700 rounded opacity-40"></div>
+          
+          {/* Corner pocket decorations */}
+          <div className="absolute -top-1 -left-1 w-3 h-3 bg-black rounded-full border border-amber-700"></div>
+          <div className="absolute -top-1 -right-1 w-3 h-3 bg-black rounded-full border border-amber-700"></div>
+          <div className="absolute -bottom-1 -left-1 w-3 h-3 bg-black rounded-full border border-amber-700"></div>
+          <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-black rounded-full border border-amber-700"></div>
+          
+          {/* Center title */}
+          <div className="absolute inset-0 flex items-center justify-center px-2">
+            <span className="text-yellow-300 font-bold text-lg text-center drop-shadow-lg" style={{ textShadow: '2px 2px 0px black, -2px -2px 0px black, 2px -2px 0px black, -2px 2px 0px black' }}>
+              {boxTitle}
+            </span>
+          </div>
         </div>
 
-        <div className="border border-solid w-[100px] h-[90px] flex items-center justify-center">
+        <div className="border border-white/20 w-[100px] h-[90px] flex items-center justify-center bg-white/10 backdrop-blur-md text-white font-semibold">
           {isEditing ? rightNumber : readOnly.right}
         </div>
         <div>

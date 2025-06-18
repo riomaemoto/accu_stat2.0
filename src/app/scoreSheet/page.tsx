@@ -75,127 +75,166 @@ export default function ScoreSheet() {
   };
 
   return (
-    <div className="w-full flex flex-col items-center justify-center bg-gray-100">
-      <div className="w-full max-w-[1400px] flex flex-col items-center justify-center p-5">
-        <div className="w-full flex justify-start mb-4">
+    <div className="min-h-screen bg-gradient-to-br from-gray-800 via-blue-900 to-gray-900">
+      <div className="w-full max-w-[1400px] mx-auto p-6">
+        <div className="flex justify-start mb-8">
           <button
             onClick={handleBack}
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            className="group relative px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 font-semibold rounded-xl shadow-lg hover:shadow-yellow-500/25 hover:scale-105 transition-all duration-300 border border-yellow-300"
           >
-            Back
+            <span className="absolute inset-0 bg-gradient-to-r from-yellow-300 to-yellow-400 rounded-xl blur opacity-75 group-hover:opacity-100 transition duration-300"></span>
+            <span className="relative">← Back</span>
           </button>
         </div>
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center space-x-4">
-            <button
-              className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition"
-              onClick={() => setIsEditing(!isEditing)}
-            >
-              {isEditing ? "Editing" : "Read Only"}
-            </button>
-            <button
-              onClick={handleSave}
-              className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
-            >
-              Save
-            </button>
+        
+        <div className="flex items-center justify-center mb-8">
+          <div className="bg-gradient-to-r from-gray-800/90 to-gray-700/90 backdrop-blur-sm border border-gray-600/50 rounded-2xl p-6 shadow-2xl">
+            <div className="flex items-center space-x-6">
+              <div className="flex items-center space-x-2">
+                <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+                <span className="text-gray-300 text-sm font-medium">Status:</span>
+              </div>
+              
+              <button
+                className={`group relative px-6 py-3 font-semibold rounded-xl transition-all duration-300 border ${
+                  isEditing 
+                    ? 'bg-gradient-to-r from-emerald-600 to-emerald-700 text-white border-emerald-500 hover:shadow-emerald-500/25' 
+                    : 'bg-gradient-to-r from-gray-600 to-gray-700 text-white border-gray-500 hover:shadow-gray-500/25'
+                } hover:scale-105`}
+                onClick={() => setIsEditing(!isEditing)}
+              >
+                <span className={`absolute inset-0 rounded-xl blur opacity-75 group-hover:opacity-100 transition duration-300 ${
+                  isEditing 
+                    ? 'bg-gradient-to-r from-emerald-500 to-emerald-600' 
+                    : 'bg-gradient-to-r from-gray-500 to-gray-600'
+                }`}></span>
+                <span className="relative flex items-center space-x-2">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    {isEditing ? (
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                    ) : (
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    )}
+                  </svg>
+                  <span>{isEditing ? "Editing Mode" : "Read Only"}</span>
+                </span>
+              </button>
+              
+              <button
+                onClick={handleSave}
+                className="group relative px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-blue-500/25 hover:scale-105 transition-all duration-300 border border-blue-500"
+              >
+                <span className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl blur opacity-75 group-hover:opacity-100 transition duration-300"></span>
+                <span className="relative flex items-center space-x-2">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+                  </svg>
+                  <span>Save Game</span>
+                </span>
+              </button>
+            </div>
           </div>
         </div>
 
-        <Toprow />
-        <Rowbox
-          boxTitle="Game Score"
-          left={gameScoreLeftAtom}
-          right={gameScoreRightAtom}
-          readOnly={readOnlyValue.gameScore}
-        />
-        <Rowbox
-          boxTitle="Total Break"
-          left={totalBreakLeftAtom}
-          right={totalBreakRightAtom}
-          readOnly={readOnlyValue.totalBreak}
-        />
-        <PercentageRowbox
-          boxTitle="Dry Breaks"
-          left={dryBreaksLeftAtom}
-          right={dryBreaksRightAtom}
-          readOnly={readOnlyValue.dryBreaks}
-        />
-        <PercentageRowbox
-          boxTitle="Scratches on Break"
-          left={scratchesonBreakLeftAtom}
-          right={scratchesonBreakRightAtom}
-          readOnly={readOnlyValue.scratchesonBreak}
-        />
-        <PercentageRowbox
-          boxTitle="Ball Made on Break"
-          left={ballsMadeonBreakLeftAtom}
-          right={ballsMadeonBreakRightAtom}
-          readOnly={readOnlyValue.ballsMadeonBreak}
-        />
-        <PercentageRowbox
-          boxTitle="Shot After The Break"
-          left={shotAfterTheBreakLeftAtom}
-          right={shotAfterTheBreakRightAtom}
-          readOnly={readOnlyValue.shotAfterTheBreak}
-        />
-        <PercentageRowbox
-          boxTitle="Break and Run"
-          left={breakAndRunLeftAtom}
-          right={breakAndRunRightAtom}
-          readOnly={readOnlyValue.breakAndRun}
-        />
-        <PercentageRowbox
-          boxTitle="Consecutive Break and Runs"
-          left={consecutiveBreakandRunsLeftAtom}
-          right={consecutiveBreakandRunsRightAtom}
-          readOnly={readOnlyValue.consecutiveBreakandRuns}
-        />
-        <Rowbox
-          boxTitle="Longest Game Winning Streak"
-          left={winningStreakLeftAtom}
-          right={winningStreakRightAtom}
-          readOnly={readOnlyValue.winningStreak}
-        />
-        <InGameStats />
-        <Rowbox
-          boxTitle="Balls Pocketed"
-          left={ballsPocketedLeftAtom}
-          right={ballsPocketedRightAtom}
-          readOnly={readOnlyValue.ballsPocketed}
-        />
-        <Rowbox
-          boxTitle="Balls Missed"
-          left={ballsMissedLeftAtom}
-          right={ballsMissedRightAtom}
-          readOnly={readOnlyValue.ballsMissed}
-        />
-        <Rowbox
-          boxTitle="Balls Missed with safety"
-          left={ballsMissedWithSafetyLeftAtom}
-          right={ballsMissedWithSafetyRightAtom}
-          readOnly={readOnlyValue.ballsMissedWithSafety}
-        />
-        <Rowbox
-          boxTitle="Unforced Errors"
-          left={unforcedErrorsLeftAtom}
-          right={unforcedErrorsRightAtom}
-          readOnly={readOnlyValue.unforcedErrors}
-        />
-        <Rowbox
-          boxTitle="Safety Errors"
-          left={safetyErrorsLeftAtom}
-          right={safetyErrorsRightAtom}
-          readOnly={readOnlyValue.safetyErrors}
-        />
-        <Rowbox
-          boxTitle="Kicking Errors"
-          left={kickingErrorsLeftAtom}
-          right={kickingErrorsRightAtom}
-          readOnly={readOnlyValue.kickingErrors}
-        />
-        <AccuStats />
-        <AccuStatWithMissSafety />
+        <div className="p-8">
+          <Toprow />
+          
+          <div className="space-y-4 mt-6">
+            <Rowbox
+              boxTitle="Game Score"
+              left={gameScoreLeftAtom}
+              right={gameScoreRightAtom}
+              readOnly={readOnlyValue.gameScore}
+            />
+            <Rowbox
+              boxTitle="Total Break"
+              left={totalBreakLeftAtom}
+              right={totalBreakRightAtom}
+              readOnly={readOnlyValue.totalBreak}
+            />
+            <PercentageRowbox
+              boxTitle="Dry Breaks"
+              left={dryBreaksLeftAtom}
+              right={dryBreaksRightAtom}
+              readOnly={readOnlyValue.dryBreaks}
+            />
+            <PercentageRowbox
+              boxTitle="Scratches on Break"
+              left={scratchesonBreakLeftAtom}
+              right={scratchesonBreakRightAtom}
+              readOnly={readOnlyValue.scratchesonBreak}
+            />
+            <PercentageRowbox
+              boxTitle="Ball Made on Break"
+              left={ballsMadeonBreakLeftAtom}
+              right={ballsMadeonBreakRightAtom}
+              readOnly={readOnlyValue.ballsMadeonBreak}
+            />
+            <PercentageRowbox
+              boxTitle="Shot After The Break"
+              left={shotAfterTheBreakLeftAtom}
+              right={shotAfterTheBreakRightAtom}
+              readOnly={readOnlyValue.shotAfterTheBreak}
+            />
+            <PercentageRowbox
+              boxTitle="Break and Run"
+              left={breakAndRunLeftAtom}
+              right={breakAndRunRightAtom}
+              readOnly={readOnlyValue.breakAndRun}
+            />
+            <PercentageRowbox
+              boxTitle="Consecutive Break and Runs"
+              left={consecutiveBreakandRunsLeftAtom}
+              right={consecutiveBreakandRunsRightAtom}
+              readOnly={readOnlyValue.consecutiveBreakandRuns}
+            />
+            <Rowbox
+              boxTitle="Longest Game Winning Streak"
+              left={winningStreakLeftAtom}
+              right={winningStreakRightAtom}
+              readOnly={readOnlyValue.winningStreak}
+            />
+            <InGameStats />
+            <Rowbox
+              boxTitle="Balls Pocketed"
+              left={ballsPocketedLeftAtom}
+              right={ballsPocketedRightAtom}
+              readOnly={readOnlyValue.ballsPocketed}
+            />
+            <Rowbox
+              boxTitle="Balls Missed"
+              left={ballsMissedLeftAtom}
+              right={ballsMissedRightAtom}
+              readOnly={readOnlyValue.ballsMissed}
+            />
+            <Rowbox
+              boxTitle="Balls Missed with safety"
+              left={ballsMissedWithSafetyLeftAtom}
+              right={ballsMissedWithSafetyRightAtom}
+              readOnly={readOnlyValue.ballsMissedWithSafety}
+            />
+            <Rowbox
+              boxTitle="Unforced Errors"
+              left={unforcedErrorsLeftAtom}
+              right={unforcedErrorsRightAtom}
+              readOnly={readOnlyValue.unforcedErrors}
+            />
+            <Rowbox
+              boxTitle="Safety Errors"
+              left={safetyErrorsLeftAtom}
+              right={safetyErrorsRightAtom}
+              readOnly={readOnlyValue.safetyErrors}
+            />
+            <Rowbox
+              boxTitle="Kicking Errors"
+              left={kickingErrorsLeftAtom}
+              right={kickingErrorsRightAtom}
+              readOnly={readOnlyValue.kickingErrors}
+            />
+            <AccuStats />
+            <AccuStatWithMissSafety />
+          </div>
+        </div>
       </div>
     </div>
   );
