@@ -7,9 +7,10 @@ type Props = {
   boxTitle: string;
   left: PrimitiveAtom<number>;
   right: PrimitiveAtom<number>;
+  isEditing?: boolean;
 };
 
-export const PercentageRowbox = ({ boxTitle, left, right }: Props) => {
+export const PercentageRowbox = ({ boxTitle, left, right, isEditing = true }: Props) => {
   const [leftNumber, setLeftNumber] = useAtom(left);
   const [rightNumber, setRightNumber] = useAtom(right);
   const totalBreakLeftValue = useAtomValue(totalBreakLeftAtom);
@@ -57,14 +58,20 @@ export const PercentageRowbox = ({ boxTitle, left, right }: Props) => {
       <div className="w-full max-w-[1400px] flex flex-row items-center justify-center">
         <div>
           <button
-            className="border border-solid w-[50px] h-[40px] md:h-[40px] flex items-center justify-center bg-green-400 my-2"
+            className={`border border-solid w-[50px] h-[40px] md:h-[40px] flex items-center justify-center my-2 ${
+              isEditing ? "bg-green-400 hover:bg-green-500" : "bg-gray-300 cursor-not-allowed"
+            }`}
             onClick={incrementLeft}
+            disabled={!isEditing}
           >
             +
           </button>
           <button
-            className="border border-solid w-[50px] h-[40px] md:h-[40px] flex items-center justify-center bg-red-300 my-2"
+            className={`border border-solid w-[50px] h-[40px] md:h-[40px] flex items-center justify-center my-2 ${
+              isEditing ? "bg-red-300 hover:bg-red-400" : "bg-gray-300 cursor-not-allowed"
+            }`}
             onClick={decrementLeft}
+            disabled={!isEditing}
           >
             -
           </button>
@@ -93,14 +100,20 @@ export const PercentageRowbox = ({ boxTitle, left, right }: Props) => {
 
         <div>
           <button
-            className="border border-solid w-[50px] h-[40px] md:h-[40px] flex items-center justify-center bg-green-400 my-2"
+            className={`border border-solid w-[50px] h-[40px] md:h-[40px] flex items-center justify-center my-2 ${
+              isEditing ? "bg-green-400 hover:bg-green-500" : "bg-gray-300 cursor-not-allowed"
+            }`}
             onClick={incrementRight}
+            disabled={!isEditing}
           >
             +
           </button>
           <button
-            className="border border-solid w-[50px] h-[40px] md:h-[40px] flex items-center justify-center bg-red-300 my-2"
+            className={`border border-solid w-[50px] h-[40px] md:h-[40px] flex items-center justify-center my-2 ${
+              isEditing ? "bg-red-300 hover:bg-red-400" : "bg-gray-300 cursor-not-allowed"
+            }`}
             onClick={decrementRight}
+            disabled={!isEditing}
           >
             -
           </button>

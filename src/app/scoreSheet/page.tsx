@@ -45,14 +45,13 @@ import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { sendStatsData, upDateStatsData } from "../supabase";
 
 export default function ScoreSheet() {
-  const [isEditing, setIsEditing] = useState(false);
+  const saveNewStat = useAtomValue(statAtom);
+  const [isEditing, setIsEditing] = useState(!saveNewStat.id);
   const router = useRouter();
 
   const handleBack = () => {
     router.push("/");
   };
-
-  const saveNewStat = useAtomValue(statAtom);
 
   const handleSave = () => {
     if (saveNewStat.id) {
@@ -78,18 +77,12 @@ export default function ScoreSheet() {
         </div>
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-4">
-            <div className="flex items-center">
-              <span className="mr-2 text-gray-700">Edit</span>
-              <label className="relative inline-flex items-center cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={isEditing}
-                  onChange={() => setIsEditing(!isEditing)}
-                  className="sr-only peer"
-                />
-                <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:bg-blue-600 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full peer-checked:after:border-white"></div>
-              </label>
-            </div>
+            <button
+              className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition"
+              onClick={() => setIsEditing(!isEditing)}
+            >
+              {isEditing ? "Editing" : "Read Only"}
+            </button>
             <button
               onClick={handleSave}
               className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
@@ -104,77 +97,92 @@ export default function ScoreSheet() {
           boxTitle="Game Score"
           left={gameScoreLeftAtom}
           right={gameScoreRightAtom}
+          isEditing={isEditing}
         />
         <Rowbox
           boxTitle="Total Break"
           left={totalBreakLeftAtom}
           right={totalBreakRightAtom}
+          isEditing={isEditing}
         />
         <PercentageRowbox
           boxTitle="Dry Breaks"
           left={dryBreaksLeftAtom}
           right={dryBreaksRightAtom}
+          isEditing={isEditing}
         />
         <PercentageRowbox
           boxTitle="Scratches on Break"
           left={scratchesonBreakLeftAtom}
           right={scratchesonBreakRightAtom}
+          isEditing={isEditing}
         />
         <PercentageRowbox
           boxTitle="Ball Made on Break"
           left={ballsMadeonBreakLeftAtom}
           right={ballsMadeonBreakRightAtom}
+          isEditing={isEditing}
         />
         <PercentageRowbox
           left={shotAfterTheBreakLeftAtom}
           right={shotAfterTheBreakRightAtom}
           boxTitle="Shot After The Break"
+          isEditing={isEditing}
         />
         <PercentageRowbox
           left={breakAndRunLeftAtom}
           right={breakAndRunRightAtom}
           boxTitle="Break and Run"
+          isEditing={isEditing}
         />
         <PercentageRowbox
           left={consecutiveBreakandRunsLeftAtom}
           right={consecutiveBreakandRunsRightAtom}
           boxTitle="Consecutive Break and Runs"
+          isEditing={isEditing}
         />
         <Rowbox
           boxTitle="Longest Game Winning Streak"
           left={winningStreakLeftAtom}
           right={winningStreakRightAtom}
+          isEditing={isEditing}
         />
         <InGameStats />
         <Rowbox
           boxTitle="Balls Pocketed"
           left={ballsPocketedLeftAtom}
           right={ballsPocketedRightAtom}
+          isEditing={isEditing}
         />
         <Rowbox
           boxTitle="Balls Missed"
           left={ballsMissedLeftAtom}
           right={ballsMissedRightAtom}
+          isEditing={isEditing}
         />
         <Rowbox
           boxTitle="Balls Missed with safety"
           left={ballsMissedWithSafetyLeftAtom}
           right={ballsMissedWithSafetyRightAtom}
+          isEditing={isEditing}
         />
         <Rowbox
           boxTitle="Unforced Errors"
           left={unforcedErrorsLeftAtom}
           right={unforcedErrorsRightAtom}
+          isEditing={isEditing}
         />
         <Rowbox
           boxTitle="Safety Errors"
           left={safetyErrorsLeftAtom}
           right={safetyErrorsRightAtom}
+          isEditing={isEditing}
         />
         <Rowbox
           boxTitle="Kicking Errors"
           left={kickingErrorsLeftAtom}
           right={kickingErrorsRightAtom}
+          isEditing={isEditing}
         />
         <AccuStats />
         <AccuStatWithMissSafety />
