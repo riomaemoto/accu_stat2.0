@@ -1,20 +1,20 @@
 "use client";
 
 import { PrimitiveAtom, useAtom, useAtomValue } from "jotai";
-import { totalBreakLeftAtom, totalBreakRightAtom } from "@/app/atom";
+import { totalBreakLeftAtom, totalBreakRightAtom, toggleAtom } from "@/app/atom";
 
 type Props = {
   boxTitle: string;
   left: PrimitiveAtom<number>;
   right: PrimitiveAtom<number>;
-  isEditing?: boolean;
 };
 
-export const PercentageRowbox = ({ boxTitle, left, right, isEditing = true }: Props) => {
+export const PercentageRowbox = ({ boxTitle, left, right }: Props) => {
   const [leftNumber, setLeftNumber] = useAtom(left);
   const [rightNumber, setRightNumber] = useAtom(right);
   const totalBreakLeftValue = useAtomValue(totalBreakLeftAtom);
   const totalBreakRightValue = useAtomValue(totalBreakRightAtom);
+  const isEditing = useAtomValue(toggleAtom);
 
   const percentageLeftValue = () => {
     const leftOutPut = Math.round((leftNumber / totalBreakLeftValue) * 100);

@@ -1,16 +1,17 @@
 "use client";
-import { PrimitiveAtom, useAtom } from "jotai";
+import { PrimitiveAtom, useAtom, useAtomValue } from "jotai";
+import { toggleAtom } from "@/app/atom";
 
 type Props = {
   boxTitle: string;
   left: PrimitiveAtom<number>;
   right: PrimitiveAtom<number>;
-  isEditing?: boolean;
 };
 
-export const Rowbox = ({ boxTitle, left, right, isEditing = true }: Props) => {
+export const Rowbox = ({ boxTitle, left, right }: Props) => {
   const [leftNumber, setLeftNumber] = useAtom(left);
   const [rightNumber, setRightNumber] = useAtom(right);
+  const isEditing = useAtomValue(toggleAtom);
 
   const incrementLeft = () => {
     if (setLeftNumber === undefined) return;

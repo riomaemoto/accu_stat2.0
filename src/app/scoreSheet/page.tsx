@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import {
   ballsMissedLeftAtom,
   ballsMissedRightAtom,
@@ -33,6 +33,7 @@ import {
   consecutiveBreakandRunsLeftAtom,
   consecutiveBreakandRunsRightAtom,
   statAtom,
+  toggleAtom,
 } from "@/app/atom";
 import { AccuStats } from "@/components/accuStat";
 import { AccuStatWithMissSafety } from "@/components/accuStatWithMissSafety";
@@ -41,13 +42,25 @@ import { InGameStats } from "@/components/inGameStats";
 import { Toprow } from "@/components/toprow";
 import { PercentageRowbox } from "@/components/percentageRowbox";
 import { useRouter } from "next/navigation";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { sendStatsData, upDateStatsData } from "../supabase";
 
 export default function ScoreSheet() {
   const saveNewStat = useAtomValue(statAtom);
-  const [isEditing, setIsEditing] = useState(!saveNewStat.id);
+  const [isEditing, setIsEditing] = useAtom(toggleAtom);
   const router = useRouter();
+  
+  // Determine if this is a new stat (no ID) or viewing existing stat (has ID)
+  const isViewingExistingStat = !!saveNewStat.id;
+  
+  // Set initial editing state based on whether it's new or existing
+  React.useEffect(() => {
+    if (isViewingExistingStat) {
+      setIsEditing(false); // Start in read-only for existing stats
+    } else {
+      setIsEditing(true); // Start in edit mode for new stats
+    }
+  }, [saveNewStat.id, setIsEditing]);
 
   const handleBack = () => {
     router.push("/");
@@ -97,92 +110,77 @@ export default function ScoreSheet() {
           boxTitle="Game Score"
           left={gameScoreLeftAtom}
           right={gameScoreRightAtom}
-          isEditing={isEditing}
         />
         <Rowbox
           boxTitle="Total Break"
           left={totalBreakLeftAtom}
           right={totalBreakRightAtom}
-          isEditing={isEditing}
         />
         <PercentageRowbox
           boxTitle="Dry Breaks"
           left={dryBreaksLeftAtom}
           right={dryBreaksRightAtom}
-          isEditing={isEditing}
         />
         <PercentageRowbox
           boxTitle="Scratches on Break"
           left={scratchesonBreakLeftAtom}
           right={scratchesonBreakRightAtom}
-          isEditing={isEditing}
         />
         <PercentageRowbox
           boxTitle="Ball Made on Break"
           left={ballsMadeonBreakLeftAtom}
           right={ballsMadeonBreakRightAtom}
-          isEditing={isEditing}
         />
         <PercentageRowbox
           left={shotAfterTheBreakLeftAtom}
           right={shotAfterTheBreakRightAtom}
           boxTitle="Shot After The Break"
-          isEditing={isEditing}
         />
         <PercentageRowbox
           left={breakAndRunLeftAtom}
           right={breakAndRunRightAtom}
           boxTitle="Break and Run"
-          isEditing={isEditing}
         />
         <PercentageRowbox
           left={consecutiveBreakandRunsLeftAtom}
           right={consecutiveBreakandRunsRightAtom}
           boxTitle="Consecutive Break and Runs"
-          isEditing={isEditing}
         />
         <Rowbox
           boxTitle="Longest Game Winning Streak"
           left={winningStreakLeftAtom}
           right={winningStreakRightAtom}
-          isEditing={isEditing}
         />
         <InGameStats />
         <Rowbox
           boxTitle="Balls Pocketed"
           left={ballsPocketedLeftAtom}
           right={ballsPocketedRightAtom}
-          isEditing={isEditing}
         />
         <Rowbox
           boxTitle="Balls Missed"
           left={ballsMissedLeftAtom}
           right={ballsMissedRightAtom}
-          isEditing={isEditing}
         />
         <Rowbox
           boxTitle="Balls Missed with safety"
           left={ballsMissedWithSafetyLeftAtom}
           right={ballsMissedWithSafetyRightAtom}
-          isEditing={isEditing}
         />
         <Rowbox
           boxTitle="Unforced Errors"
           left={unforcedErrorsLeftAtom}
           right={unforcedErrorsRightAtom}
-          isEditing={isEditing}
         />
         <Rowbox
           boxTitle="Safety Errors"
           left={safetyErrorsLeftAtom}
           right={safetyErrorsRightAtom}
-          isEditing={isEditing}
         />
         <Rowbox
           boxTitle="Kicking Errors"
           left={kickingErrorsLeftAtom}
           right={kickingErrorsRightAtom}
-          isEditing={isEditing}
         />
         <AccuStats />
         <AccuStatWithMissSafety />
