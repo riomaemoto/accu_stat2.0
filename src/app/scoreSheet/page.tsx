@@ -49,16 +49,14 @@ export default function ScoreSheet() {
   const saveNewStat = useAtomValue(statAtom);
   const [isEditing, setIsEditing] = useAtom(toggleAtom);
   const router = useRouter();
-  
-  // Determine if this is a new stat (no ID) or viewing existing stat (has ID)
+
   const isViewingExistingStat = !!saveNewStat.id;
-  
-  // Set initial editing state based on whether it's new or existing
+
   React.useEffect(() => {
     if (isViewingExistingStat) {
-      setIsEditing(false); // Start in read-only for existing stats
+      setIsEditing(false);
     } else {
-      setIsEditing(true); // Start in edit mode for new stats
+      setIsEditing(true);
     }
   }, [saveNewStat.id, setIsEditing]);
 
@@ -68,12 +66,9 @@ export default function ScoreSheet() {
 
   const handleSave = () => {
     if (saveNewStat.id) {
-      // if (saveNewStat.id) はもし、idが存在する場合、という意味。データがあるので、IDがあるため。
-      // idがある場合、下のように既存のデータを更新する
       upDateStatsData(saveNewStat);
     } else {
       sendStatsData(saveNewStat);
-      // 無ければ新しいデータを送信する
     }
   };
 
